@@ -1,0 +1,69 @@
+# Mood register → Storyblocks Audio search query map (Lane 04)
+# Authority: artifacts/research/storyblocks_semantic_sourcing_20260720/RESEARCH_REPORT.md §3
+#            artifacts/research/storyblocks_semantic_sourcing_20260720/RECOMMENDED_TAXONOMY.md §1.6
+# Clusters: config/social/media_bank_sizing_20260719.yaml → audio_bank.mood_registers.clusters
+# Endpoint: GET /api/v2/audio/search (HMAC via scripts/storyblocks/api_client.py search_audio)
+# MAU: search is free; confirm_selection / HD download meters the same MAU ledger as video/image.
+schema_version: "1.0.0"
+provider: storyblocks
+media_type: audio
+content_type_default: music
+extended_default: "moods,genres,bpm,keywords,instruments,pro,publisher,hasTalentReleased,hasPropertyReleased"
+bank_layout: "artifacts/storyblocks_licensed/{work_unit_id}/audio/{asset_id}.{ext}"
+notes:
+  - Synthetic sine-bed fallback in build_video_snippet_bank.build_snippet_bed MUST remain.
+  - Do not treat audio HD as free of MAU.
+  - Persist pro/publisher from extended metadata on license sidecar (EULA audio extras).
+  - assets/music_bank/ is a separate narration/audiobook bank — do not collide paths.
+
+mood_register_audio:
+  tense_anxious:
+    topics: [anxiety, financial_anxiety, financial_stress, social_anxiety, sleep_anxiety, overthinking]
+    keywords: [tense, anxious, suspense, pulse, underscore]
+    content_type: music
+    min_bpm: 90
+    max_bpm: 130
+    has_vocals: false
+    filtered_keywords: [comedy, christmas, kids, party]
+    genres_hint: [underscore, thriller, drama]
+    moods_hint: [tense, anxious, suspenseful]
+  heavy_low:
+    topics: [depression, grief, burnout, compassion_fatigue]
+    keywords: [melancholy, somber, ambient, slow, reflective]
+    content_type: music
+    max_bpm: 90
+    has_vocals: false
+    filtered_keywords: [upbeat, party, edm, drop]
+    genres_hint: [ambient, cinematic, neo-classical]
+    moods_hint: [melancholy, somber, reflective]
+  grounding_somatic:
+    topics: [somatic_healing, boundaries]
+    keywords: [calm, ambient, peaceful, breath, soft piano]
+    content_type: music
+    max_bpm: 100
+    has_vocals: false
+    filtered_keywords: [aggressive, horror, trap]
+    genres_hint: [ambient, acoustic, neo-classical]
+    moods_hint: [calm, peaceful, soothing]
+  empowering_courage:
+    topics: [courage, self_worth, imposter_syndrome]
+    keywords: [uplifting, inspiring, hopeful, resolve, warm]
+    content_type: music
+    min_bpm: 100
+    max_bpm: 140
+    has_vocals: false
+    filtered_keywords: [aggressive, war drums, horror]
+    genres_hint: [cinematic, inspirational, corporate]
+    moods_hint: [uplifting, hopeful, inspiring]
+
+# Smoke → pilot → scale (operator + keys required for EXECUTED-REAL)
+rollout:
+  smoke:
+    mood_registers: [tense_anxious]
+    work_units_per_mood: 1
+  pilot:
+    mood_registers: [tense_anxious, heavy_low, grounding_somatic, empowering_courage]
+    work_units_per_mood: 1
+  scale:
+    requires: [operator_review, storyblocks_keys_in_keychain]
+    note: Do not license music at catalog scale in Lane 04.

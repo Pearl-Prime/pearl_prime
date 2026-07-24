@@ -1,0 +1,423 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_008
+genre_id: sports_competition
+title: '静寂のフリースロー — Episode 8: The Mirror (鏡)'
+logline: Scouting the loser's-bracket route at a shared tournament venue, Hayato
+  and Aya stop at a vending machine between gyms and watch Kiryuu Pharma's captain
+  run the exact same free-throw routine nine times in a row without once missing
+  or reacting — and catch, by accident, the one crack in it that his own team
+  never sees.
+stakes_now: Shinonome is one loss into the loser's bracket, Hayato's body still
+  carrying yesterday's mistake as tape and a low ache, and the team has no
+  tactical information yet about who they might face if they keep winning.
+stakes_end: Hayato and Aya have watched a flawless, mechanically controlled
+  rival at close range and gained no usable tactical opening — Aya's scouting
+  notebook stays closed — while the reader alone has seen the one private
+  crack in that control, and Hayato's own unconscious hand has started
+  shaking in direct, unremarked mirror of it.
+genre_cadence:
+  - venue_arrival_and_bracket_cost
+  - body_cost_from_prior_loss
+  - team_task_established
+  - transit_between_gyms
+  - vending_machine_interstitial
+  - rival_practice_glimpsed
+  - controlled_routine_established
+  - routine_escalation_count
+  - humanizing_crack_witnessed
+  - control_reasserted
+  - protagonist_reaction_and_mirror
+  - team_pulled_back_to_task
+  - bracket_board_return
+  - closing_juxtaposition
+page_turn_promises:
+  - page_id: ep_008_p01
+    promise: How much has changed since yesterday's loss — for the team, and for
+      Hayato's own body?
+  - page_id: ep_008_p02
+    promise: What is on the other side of the propped gym doors, and why does it
+      stop Hayato mid-drink?
+  - page_id: ep_008_p03
+    promise: Is the rival's control really total, or is there one place it
+      slips?
+  - page_id: ep_008_p04
+    promise: What does Hayato do with what he just saw, when there's nothing
+      tactical to write down?
+  - page_id: ep_008_p05
+    promise: How close are these two teams, really — and what does Hayato carry
+      back into his own gym?
+panels:
+  - panel_id: ep008_001
+    page_id: ep_008_p01
+    story_function: venue_arrival_and_bracket_cost
+    story_move: The episode opens on the shared tournament complex's exterior,
+      establishing that Shinonome arrives quieter than they did for ep_006's
+      first qualifier — the optimism of the season opener is gone.
+    visual_proof: Wide exterior of a multi-court sports complex, banners for
+      several overlapping corporate leagues, Shinonome's players entering
+      without the earlier episodes' nervous energy.
+    information_delta: Reader confirms this is a shared, multi-team venue
+      before any single opponent is named.
+    beat_role: pre_trigger_calm
+    action_intensity: 0
+    silence: true
+    dialogue_allowed: false
+  - panel_id: ep008_002
+    page_id: ep_008_p01
+    story_function: venue_arrival_and_bracket_cost
+    story_move: A close shot on the tournament bracket board shows Shinonome's
+      name already moved into the loser's-bracket column, making ep_007's
+      loss concrete and spatial rather than just remembered.
+    visual_proof: Close on a wall-mounted bracket board, red line moving
+      Shinonome's name to the loser's-bracket block.
+    information_delta: Reader sees the season's new structural stakes made
+      literal on an object, not narrated.
+    beat_role: trigger_onset
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_003
+    page_id: ep_008_p01
+    story_function: body_cost_from_prior_loss
+    story_move: Hayato's taped ankle from yesterday's turnover is shown in
+      close, testing weight once — the physical residue of ep_007 carried
+      forward without a word of guilt spoken.
+    visual_proof: Close on a taped ankle with a faint bruise above the sock
+      line, weight-testing gesture.
+    information_delta: Reader measures the mistake's cost in the body, not in
+      dialogue.
+    beat_role: somatic_onset
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_004
+    page_id: ep_008_p01
+    story_function: team_task_established
+    story_move: Endou states the team's only remaining path forward without
+      turning around — climbing out of the loser's bracket is the sole
+      option left.
+    visual_proof: Medium shot, Endou walking ahead scanning the bracket board,
+      not making eye contact.
+    information_delta: Reader gets the team's stated stakes from its most
+      skeptical member, establishing his register for the episode.
+    beat_role: coach_cut
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_005
+    page_id: ep_008_p01
+    story_function: team_task_established
+    story_move: Aya notices Hayato is elsewhere mentally; his internal
+      monologue confirms yesterday's mistake is still looping, unresolved.
+    visual_proof: Medium two-shot, Aya checking in, Hayato distracted.
+    information_delta: Reader confirms Hayato has not processed ep_007 yet,
+      raising the episode's quiet internal stakes.
+    beat_role: interior_focus
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_006
+    page_id: ep_008_p01
+    story_function: team_task_established
+    story_move: Aya proposes a practical scouting walk to see potential future
+      opponents before their own next match, naming "rival" directly and
+      establishing this episode's actual activity.
+    visual_proof: Aya tapping her scouting notebook, proposing the walk.
+    information_delta: Reader learns the episode's concrete task — scouting,
+      not competing — and Hayato's latent desire to know what's coming.
+    beat_role: mirror_introduced
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_007
+    page_id: ep_008_p02
+    story_function: transit_between_gyms
+    story_move: The team crosses a breezeway connecting two gyms; another
+      team's practice sounds leak through propped doors before anything is
+      seen.
+    visual_proof: Wide corridor shot, propped double doors, shoe-squeak and
+      ball-bounce SFX bleeding through.
+    information_delta: Reader is primed for a rival encounter through sound
+      alone, before any visual reveal.
+    beat_role: escalation_transit
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_008
+    page_id: ep_008_p02
+    story_function: vending_machine_interstitial
+    story_move: Aya stops the group at a vending machine between gyms, naming
+      Hayato's physical fatigue from yesterday directly.
+    visual_proof: Close on a humming vending machine with several sold-out
+      slots, Aya with an IC card.
+    information_delta: Reader gets the episode's modern-reader catalyst object
+      realized as concrete action, not a name-drop.
+    beat_role: ground_attempt
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_009
+    page_id: ep_008_p02
+    story_function: vending_machine_interstitial
+    story_move: A warm can of coffee drops into Hayato's hand, but he doesn't
+      open it — his attention is already elsewhere down the hallway.
+    visual_proof: Close on a can dropping into the vending tray, Hayato
+      holding it unopened.
+    information_delta: Reader tracks the coffee can becoming an unconscious
+      tension object, seeded for reuse later in the episode.
+    beat_role: ground_attempt
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_010
+    page_id: ep_008_p02
+    story_function: rival_practice_glimpsed
+    story_move: Through the propped double doors, Hayato and Aya's POV finds
+      a rival team's practice — one player working the free-throw line alone
+      while teammates run drills around him.
+    visual_proof: Wide POV shot through double doors into an adjacent court,
+      one isolated player at the free-throw line.
+    information_delta: Reader gets the first visual of Kiryuu Ren, still
+      unnamed, established purely through isolated routine before dialogue
+      names him.
+    beat_role: mirror_introduced
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_011
+    page_id: ep_008_p02
+    story_function: controlled_routine_established
+    story_move: A clean, silent make with no celebration from Ren or his
+      teammates; Aya recognizes the company crest as Kiryuu Pharma, last
+      year's runner-up.
+    visual_proof: Medium shot, ball swishing the net, no reaction from bench;
+      Aya reading the jersey crest.
+    information_delta: Reader learns the rival's name and tournament
+      pedigree in the same beat the routine's flatness is established.
+    beat_role: mirror_introduced
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_012
+    page_id: ep_008_p02
+    story_function: controlled_routine_established
+    story_move: Hayato's internal monologue names exactly what unsettles him —
+      the same spot, same bounce count, every time, nothing ever breaking
+      down — the direct inverse of his own scattered routine.
+    visual_proof: Close on Hayato's hands, unopened can still held, eyes fixed
+      on the rival court.
+    information_delta: Reader gets the thematic mirror stated through
+      Hayato's own specific, sport-literate observation, not narration.
+    beat_role: interior_focus
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_013
+    page_id: ep_008_p03
+    story_function: routine_escalation_count
+    story_move: A montage panel counts Ren's makes upward as a teammate,
+      Miyashita, calls out the ninth attempt.
+    visual_proof: Insert montage of repeated identical free-throw form at
+      increasing counts, Miyashita calling the number with a towel in hand.
+    information_delta: Reader is given a specific, countable escalation (nine
+      makes) rather than a vague "he never misses."
+    beat_role: escalation_transit
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_014
+    page_id: ep_008_p03
+    story_function: routine_escalation_count
+    story_move: The ninth shot lands exactly like the first — no fist pump,
+      no exhale — and Ren is already jogging back to drills before the net
+      stops moving.
+    visual_proof: Wide shot, clean swish, immediate return to team drills.
+    information_delta: Reader confirms the routine's flatness holds even at
+      an escalated count.
+    beat_role: technique_execution
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_015
+    page_id: ep_008_p03
+    story_function: humanizing_crack_witnessed
+    story_move: An insert close-up catches Ren's fingers gripping the ball's
+      seams fractionally tighter than on shot one, a single-panel tell gone
+      before the release completes.
+    visual_proof: Extreme close on a hand's grip pressure, held for exactly
+      one panel before the ball leaves frame.
+    information_delta: Reader alone receives proof that the control has a
+      cost — neither Hayato, Aya, nor Ren's own teammates register it.
+    beat_role: interior_focus
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_016
+    page_id: ep_008_p03
+    story_function: humanizing_crack_witnessed
+    story_move: Miyashita jogs past with a joking aside that names the real
+      pressure source — Ren's father is watching again from the upper deck.
+    visual_proof: Medium shot, Miyashita retrieving the ball, casual delivery
+      of the line.
+    information_delta: Reader learns the specific, concrete source of Ren's
+      pressure through a teammate's aside, never through Ren's own
+      monologue.
+    beat_role: mirror_introduced
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_017
+    page_id: ep_008_p03
+    story_function: humanizing_crack_witnessed
+    story_move: Ren's eyes flick once toward a still, arms-crossed man in a
+      gray suit in the stands, then away first — the episode's required
+      single humanizing beat, delivered entirely in gesture.
+    visual_proof: Close on Ren's eyes shifting to the upper section, then
+      returning to the rack; a still figure in gray in the background.
+    information_delta: Reader confirms the crack's source is external,
+      parental/corporate pressure, without a line of dialogue naming it.
+    beat_role: interior_focus
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_018
+    page_id: ep_008_p03
+    story_function: control_reasserted
+    story_move: By the tenth ball, Ren's count and composure have both reset
+      to exactly zero, the crack invisible again.
+    visual_proof: Wide shot, Ren back at the line, breath even, form
+      unchanged.
+    information_delta: Reader sees the control close back over the crack as
+      completely as it opened, proving the mirror is durable, not broken.
+    beat_role: aftermath_silence
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_019
+    page_id: ep_008_p04
+    story_function: protagonist_reaction_and_mirror
+    story_move: Back at the doorway, Hayato finally opens the can and voices
+      the plain fact of what they just watched — this is who they might face.
+    visual_proof: Medium two-shot at the corridor doorway, Hayato drinking,
+      quiet delivery.
+    information_delta: Reader gets Hayato's stated read of the stakes,
+      grounded and specific rather than awed.
+    beat_role: reaction_shot
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_020
+    page_id: ep_008_p04
+    story_function: protagonist_reaction_and_mirror
+    story_move: Aya closes her scouting notebook having written nothing —
+      tactically, there is no visible opening to exploit.
+    visual_proof: Close on the notebook closing, blank page implied.
+    information_delta: Reader learns the scouting trip yielded no usable
+      tactical information, sharpening the dramatic irony of panel 17.
+    beat_role: reaction_shot
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_021
+    page_id: ep_008_p04
+    story_function: protagonist_reaction_and_mirror
+    story_move: Endou catches up, reads a tournament-favorite banner near the
+      rival scoreboard, and gives the team's rival-respect line in one short
+      sentence.
+    visual_proof: Medium shot, Endou looking past the doors at a "favorite to
+      win" banner.
+    information_delta: Reader gets the tournament's own public assessment of
+      Kiryuu Pharma, corroborating Aya's read from an outside source.
+    beat_role: reaction_shot
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_022
+    page_id: ep_008_p04
+    story_function: protagonist_reaction_and_mirror
+    story_move: Hayato's free hand unconsciously curls the same way Ren's
+      fingers did before shot nine — but his keeps shaking instead of
+      steadying, the episode's direct physical mirror.
+    visual_proof: Close on Hayato's empty hand clenching once, a small tremor
+      visible.
+    information_delta: Reader receives the episode's thesis image — same
+      gesture, opposite result — entirely through body language.
+    beat_role: interior_focus
+    action_intensity: 2
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_023
+    page_id: ep_008_p04
+    story_function: team_pulled_back_to_task
+    story_move: Aya notices the hand but says nothing about it, closing the
+      notebook and nudging Hayato back toward their own upcoming match.
+    visual_proof: Medium shot, Aya's hand on Hayato's shoulder, notebook
+      tucked away.
+    information_delta: Reader sees care modeled through restraint, not
+      commentary — no one names what Hayato is feeling.
+    beat_role: reaction_shot
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: true
+  - panel_id: ep008_024
+    page_id: ep_008_p05
+    story_function: bracket_board_return
+    story_move: Walking back, the team passes the bracket board again —
+      Shinonome's line and Kiryuu Pharma's line still several rounds apart.
+    visual_proof: Wide corridor shot, bracket board with both team names
+      visible but structurally distant.
+    information_delta: Reader confirms the two teams are not yet forced to
+      meet, closing the episode's frame without resolving anything.
+    beat_role: closing_wide
+    action_intensity: 0
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_025
+    page_id: ep_008_p05
+    story_function: closing_juxtaposition
+    story_move: Hayato notices, only now, that he has unconsciously dented
+      the rim of the coffee can in his grip.
+    visual_proof: Close on a dented can rim before it's dropped in a recycling
+      bin.
+    information_delta: Reader receives the episode's final proof of body-cost
+      carried without conscious awareness.
+    beat_role: honest_landing
+    action_intensity: 1
+    silence: false
+    dialogue_allowed: false
+  - panel_id: ep008_026
+    page_id: ep_008_p05
+    story_function: closing_juxtaposition
+    story_move: At his own gym's entrance, Hayato glances back once at the
+      unbroken rhythm of Kiryuu Pharma's drill still audible down the
+      corridor, then forward toward his own team calling his name.
+    visual_proof: Wide shot at a doorway threshold, corridor receding behind,
+      teammates' voices implied ahead.
+    information_delta: Reader closes on an unresolved juxtaposition — the
+      rival's untouched control behind him, his own team's demands ahead —
+      with no lesson stated and no game played this episode.
+    beat_role: honest_landing
+    action_intensity: 0
+    silence: true
+    dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_008.yaml
+notes: |
+  Freshly authored as arc 1's rival-introduction episode (ep_008 of 12),
+  following directly from ep_007's first qualifier loss. No match is played
+  this chapter — it is a pure scouting/observation beat, deliberately quiet
+  after ep_007's crowd-and-scoreboard overload. Introduces Kiryuu Ren as a
+  mirror-rival (control without feeling vs. Hayato's feeling without control)
+  per the sports_competition craft bible's rival-humanization requirement;
+  the required single humanizing beat (panels 15-17) is delivered entirely
+  through gesture and a supporting character's aside, never through Ren's
+  own interior monologue. Follows the same storyboard-first sequence used
+  for the stillness_press ep_001-012 backfill. NOTE per repo state at time
+  of authoring: scripts/ci/check_manga_arc_storyboard.py does not exist in
+  this checkout and could not be run against this file; the file is written
+  to the established shape (matching
+  stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml)
+  for continuity and future-proofing regardless.

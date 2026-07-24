@@ -1,34 +1,241 @@
-This dataset outlines a structured narrative arc regarding **psychological boundaries in corporate management**, specifically focusing on the mechanism of "spiraling" (catastrophizing) and its resolution through cognitive boundary-setting.
 
-The data is organized into four distinct phases for five different managerial personas (David, Sarah, Kevin, Anthony, Tanya):
 
-1.  **RECOGNITION (v01–v05):** The initial trigger where a single data point (criticism, bad interaction, underperformance, variance, bad metric) collapses into an identity threat due to lack of boundaries.
-    *   *Key State:* `pre_awareness`, high internal cost, physical tension (tight chest, cold hands, etc.).
-2.  **MECHANISM_PROOF (v01–v05):** The escalation where the spiral dictates behavior and decision-making. The lack of boundary turns isolated incidents into systemic narratives.
-    *   *Key State:* `destabilization`, reactive management, sustained physical symptoms.
-3.  **TURNING_POINT (v01–v05):** The intervention where the manager consciously sets a cognitive boundary to separate the *event* from the *identity/system*.
-    *   *Key State:* `experimentation`, interruption of the cascade, physical release (unclenching, warming).
-4.  **EMBODIMENT (v01–v05):** The integrated state where maintaining boundaries becomes automatic/early-detected.
-    *   *Key State:* `self_claim`, low cost, physical ease (open chest, warm hands, relaxed shoulders).
+## RECOGNITION v01
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+大衛收到一則批評，立刻螺旋思考。這則批評，啟動了他「自己正在失敗」的恐懼。他的胸口發緊，他開始用這則批評的濾鏡，重新檢視自己做過的每一件事。一個評語，變成了系統性失敗的證據。因為在這則評語和身分威脅之間，沒有一條界線，這場螺旋吞噬了他。他不再是在處理回饋，他在做災難化思考。
+---
 
-### Structural Analysis
+## RECOGNITION v02
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/recognition/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+莎拉遇到一次困難的顧客互動，立刻螺旋思考跌入「團隊失敗了」的結論。一次糟糕的互動和系統性團隊失敗之間，並沒有一條界線。她的雙手發冷，這場螺旋在沒有任何東西能讓它慢下來的情況下加速。一起事件，變成了「我們正在失敗」，變成了「我沒能建立一個好團隊」。
+---
 
-*   **Progression of Identity Stage:** The arc moves clearly from `pre_awareness` → `destabilization` → `experimentation` → `self_claim`. This maps to a standard psychological maturation or therapeutic progress model.
-*   **Somatic Markers:** Each character has a consistent somatic anchor that tracks their stress level:
-    *   David: Chest (tight → unclenches → open)
-    *   Sarah: Hands (cold → warm → warm)
-    *   Kevin: Shoulders (tense → release → relaxed)
-    *   Anthony: Throat (tight → releases → open)
-    *   Tanya: Stomach (hollow → settles → calm)
-*   **Cost Dynamics:**
-    *   *Internal Cost* peaks at intensity 3 during destabilization and drops to 1 in embodiment.
-    *   *Social Cost* appears only for Sarah (likely due to her spiral affecting team management decisions directly), highlighting that some spirals have externalized consequences while others remain internalized.
+## RECOGNITION v03
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/recognition/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+凱文看到一個人表現不佳，螺旋跌入對整個組織狀態的憂慮。一個人的掙扎和組織性失敗之間的界線，已經崩塌了。他的肩膀繃緊，這場螺旋是自動的。一個資料點，變成了系統性問題的證據。他不再是在思考，他在螺旋。
+---
 
-### Potential Applications
+## RECOGNITION v04
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/recognition/micro/v04.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+安東尼看到一項預測的落差，螺旋跌入董事會評鑑他的想像。一項落差和工作保障之間，並沒有界線。他的喉嚨發緊，他不再是在評估這項落差，他在災難化思考這項落差對他未來意味著什麼。
+---
 
-This structure is highly suitable for:
-1.  **Leadership Training Modules:** Teaching managers to identify their specific "spiral trigger" and somatic warning signs.
-2.  **Cognitive Behavioral Therapy (CBT) Tools:** Illustrating the concept of "cognitive defusion" or "boundary setting" in a professional context.
-3.  **Organizational Psychology Research:** Analyzing how lack of psychological safety or poor feedback structures contribute to `pre_awareness` states.
+## RECOGNITION v05
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/recognition/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+譚雅收到一項不好的指標，螺旋跌入組織性失敗的想法。一項指標和系統性問題之間的界線，已經瓦解了。她的胃感覺空洞，這場螺旋，在她還沒搞懂這個數據代表什麼之前，就已經耗盡了她的精力。
+---
 
-Would you like me to generate a synthesis report, create a training script based on one of these arcs, or analyze the differences between the characters' triggers?
+## MECHANISM_PROOF v01
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+大衛的螺旋加速了，因為沒有一條界線能阻止它。一則評語，變成了四個小時檢視自己管理決定的時間。他的胸口一直發緊。他已經失去了把一則批評，維持在它本來大小的能力，他把它變成了他根本上失敗的證據。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+莎拉的螺旋，在沒有界線的情況下加速了。她現在確信這個團隊壞掉了，而這都是她的錯。她開始從恐懼出發管理，而不是從清晰出發。這場螺旋，正在生產決定。她不是在思考，她在反應。她的雙手一直是冷的。界線的缺席，把一次互動，變成了團隊管理策略。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+凱文的螺旋，在沒有界線的情況下吞噬了他。他現在質疑起自己整套的領導方式。一個人的表現不佳，變成了對他能力的一場公投。他的肩膀一直緊繃。這場螺旋，正在生產他失敗的證據。他無法清晰地思考，他在螺旋。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/mechanism_proof/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+安東尼的螺旋，在沒有界線的情況下加速了。那個落差，變成了工作上的威脅，他開始在心理上為自己被取代做準備。他的喉嚨一直緊繃。這場螺旋，正在生產敘事。他不是在分析數據，他在災難化思考。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+譚雅的螺旋，在沒有界線的情況下加速了。一項指標，變成了系統性失敗，變成了她的失敗，變成了她不該待在這個職位上。她的胃一直是空洞的。這場螺旋，正在耗盡她所有的精力。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+大衛注意到這場螺旋，設下了一條界線：「這是關於一個處境的回饋，不是關於我根本的能力。」這條界線，在螺旋吞噬他之前，先打斷了它。他的胸口稍稍鬆開了。這條界線，就是那個攔住連鎖反應的東西。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+莎拉設下了一條界線：「一次困難的互動是資料，不是系統性失敗的證據。」這條界線，攔住了這場螺旋。她的雙手漸漸回暖了。她現在能真正處理那次互動，而不必讓它螺旋成對整個團隊的評判。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+凱文設下了一條界線：「一個人的掙扎，是一場管理對話，不是組織性失敗的證據。」這條界線，攔住了這場螺旋。他的肩膀放鬆了。他現在能處理那個人的處境，而不必把它變成關於他整個組織的事。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+安東尼設下了一條界線：「落差就是落差，跟工作保障無關。」這條界線，攔住了這場螺旋。他的喉嚨鬆開了。他現在能真正分析那項落差，而不必災難化思考。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+譚雅設下了一條界線：「一項指標，是關於那項指標的資料，跟我的領導力無關。」這條界線，攔住了這場螺旋。她的胃安定下來了。她現在能處理那項指標，而不必災難化思考。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+大衛透過維持這條界線，及早抓住螺旋。回饋就是回饋，不是身分威脅。他的胸口保持打開。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+莎拉把困難的互動放在合理的比例裡看待，一個處境就是一個處境。她的雙手是溫暖的。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+凱文管理人，卻不把它變成系統性失敗。他的肩膀是放鬆的。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+安東尼分析落差，卻不災難化思考。他的喉嚨是打開的。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/corporate_managers/anchored/boundaries_spiral/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+譚雅把指標當成資料來管理。她的胃是平靜的。
+---

@@ -1,0 +1,611 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_009
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_009.arc_storyboard.yaml
+title: '「静寂のフリースロー」 第9話「既読、それだけ」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 9: Read, Not Answered'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: "the coach of the unclenched"
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary
+    life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips,
+    rankings, team chats, finance/time pressure, and physical cost without
+    letting analytics replace the body.
+  catalyst:
+    id: the_group_chat_gone_quiet
+    logline: The morning after the loss, the team's LINE group chat -- usually
+      cluttered with practice memes -- stays conspicuously silent, and the
+      silence itself becomes louder proof of doubt than anything anyone
+      actually types.
+    ordinary_world_objects:
+    - line_group_chat
+    - unread_message_count
+    - practice_schedule_post
+    - read_receipt
+    genre_transmutation: A quiet group chat becomes the visible shape of team
+      doubt; an unanswered practice-schedule post becomes the question of
+      whether Hayato still has a starting spot.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world
+    entrypoint. Market=ja_JP; audience=gen_z. Use catalyst
+    'the_group_chat_gone_quiet'. Market surface rule per
+    config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects
+    and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公。東雲商事の新入社員、営業支援。ep_007の敗戦を招いたミスの当人。
+  visual_anchor: 崩れかけたワイシャツ、机の引き出しにしまっていた古いスニーカー、
+    詰まったときに指の関節をペンで叩く癖、前腕に残る小さな擦り傷。
+- id: aya
+  name: 美濃部 彩
+  name_romaji: Minobe Aya
+  age: 25
+  role: 隼人の職場の先輩であり、部の事実上のキャプテン兼マネージャー。この話では
+    隼人を擁護するが、チーム全体の空気までは変えられない。
+  visual_anchor: 束ねた髪、クリップボード、スマートフォンを裏返す癖。
+- id: endou
+  name: 遠藤 岳
+  name_romaji: Endou Gaku
+  age: 34
+  role: チームのエース。ep_007以来、隼人のスタメン起用に疑問を持っている。
+    悪意はないが、率直すぎる。
+  visual_anchor: 大柄、腕を組む癖、口数は少ないが言うときははっきり言う。
+- id: matsuo
+  name: 松尾 洋介
+  name_romaji: Matsuo Yousuke
+  age: 22
+  role: 控えのガード。遠藤より慎重で気弱だが、同じ不安を抱えている。人前より
+    陰で本音が出るタイプ。
+  visual_anchor: 眼鏡、靴紐を何度も結び直す癖、他人と目を合わせるのが苦手。
+- id: kuroda
+  name: 黒田
+  name_romaji: Kuroda
+  age: 60s
+  role: 会社の設備管理員。元セミプロ選手。この話でも完全に沈黙——台詞なし、
+    背景でボールラックを直すのみ。
+  visual_anchor: 作業着、一定のリズムでボールラックを整える手つき。
+
+scene_palette:
+  primary: 曇り空の朝の青灰色 + オフィス蛍光灯の白
+  secondary: 通勤電車の窓越しの薄明かり + 夜の体育館の非常灯オレンジ
+  accent: スマートフォン画面の冷たい青白い光（既読の色）
+
+pages:
+- page_id: ep_009_p01
+  panels:
+  - panel_id: ep009_001
+    scene: |
+      薄暗い部屋、夜明け前。神崎隼人の前腕に、小さな擦り傷が残っている——
+      三日前、床に倒れ込んだときの痕。目覚まし時計が鳴るより先に、彼の目は
+      すでに開いている。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "身体が先に来る——ep_007の敗戦の痕跡が、まだ皮膚の上に残っている"
+
+  - panel_id: ep009_002
+    scene: |
+      スマートフォンの画面クローズアップ。「東雲商事バスケ部」——未読の
+      バッジ表示は動いていない。三日前、隼人が送った「すみませんでした」の
+      文字には既読が全員分ついているが、その下に返信は一つもない。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: 既読は全員についた。返信は、一つもなかった。
+      en_US: The unread badge still said twelve — but the one reply that
+        mattered never came. The silence between the messages, in this
+        group chat, said more than any reply could have.
+      zh_TW: '[zh_TW] The unread badge still said twelve — but the one
+        reply that mattered never came. The silence between the messages,
+        in this group chat, said more than any reply could have.'
+      zh_CN: '[zh_CN] The unread badge still said twelve — but the one
+        reply that mattered never came. The silence between the messages,
+        in this group chat, said more than any reply could have.'
+    intent: "カタリストの明示——既読と沈黙という具体的なオブジェクト"
+
+  - panel_id: ep009_003
+    scene: |
+      隼人の顔のタイトクローズアップ。親指が返信欄に触れずに画面の上で
+      止まっている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: 既読はついてる。見てはいる。……それだけだ。
+        en_US: "They've seen it. They're just choosing not to say anything."
+        zh_TW: "[zh_TW] They've seen it. They're just choosing not to say
+          anything."
+        zh_CN: "[zh_CN] They've seen it. They're just choosing not to say
+          anything."
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+    intent: "隼人自身の解釈——この後の展開でその解釈が試される"
+
+  - panel_id: ep009_004
+    scene: |
+      身支度をする隼人。ネクタイを結びながら、もう片方の手ではペンの
+      キャップの端で指の関節を叩いている。スマホは机の上に伏せたまま。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "確立された身体の癖の再来——別の負荷に対する反応として"
+
+  - panel_id: ep009_005
+    scene: |
+      混み合う通勤電車のホーム、車内。隼人は反射的にポケットからスマホを
+      半分だけ出し、また押し戻す。
+    beat_type: spatial
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: 見るのをやめよう。
+        en_US: "I need to stop checking."
+        zh_TW: "[zh_TW] I need to stop checking."
+        zh_CN: "[zh_CN] I need to stop checking."
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_left
+      font_override_by_locale:
+        en_US: italic_internal
+    intent: "小さな、失敗する自制の試み——通勤という現代的な現場で"
+
+  - panel_id: ep009_006
+    scene: |
+      東雲商事、営業支援部のオフィス。名札をつけた隼人が、いつも通りの
+      声で朝の挨拶を交わす。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: おはようございます。
+        en_US: "Morning."
+        zh_TW: "[zh_TW] Morning."
+        zh_CN: "[zh_CN] Morning."
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "職場の仮面——公私の落差の具体化"
+
+  - panel_id: ep009_007
+    scene: |
+      少し離れた席で、彩が書類の陰から隼人をちらりと見る。何か言いかけて、
+      やめる。
+    beat_type: micro
+    intent: "彩の抑制——後の直接的な介入への伏線"
+
+  - panel_id: ep009_008
+    scene: |
+      昼休みの休憩室。彩が隼人をつかまえ、テーブル越しに話しかける。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: ちゃんと寝た?
+        en_US: "Did you actually sleep?"
+        zh_TW: "[zh_TW] Did you actually sleep?"
+        zh_CN: "[zh_CN] Did you actually sleep?"
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: まあ、それなりに。
+        en_US: "More or less."
+        zh_TW: "[zh_TW] More or less."
+        zh_CN: "[zh_CN] More or less."
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    - speaker: aya
+      text_by_locale:
+        ja_JP: グループ、みんな今ちょっと言葉が見つからないだけだよ。
+        en_US: "Everyone in the group chat — they just haven't found the
+          words yet."
+        zh_TW: "[zh_TW] Everyone in the group chat — they just haven't
+          found the words yet."
+        zh_CN: "[zh_CN] Everyone in the group chat — they just haven't
+          found the words yet."
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "彩の部分的な擁護——安心させきれない、正直な理論"
+
+  - panel_id: ep009_009
+    scene: |
+      テーブルの上で彩のスマホが震える。画面に一瞬——「レギュラー組」という
+      グループ名と、遠藤の名前。彩がすぐに端末を裏返す。隼人はそれを
+      見てしまった。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: 隼人には入っていないグループ。
+      en_US: "A group chat he wasn't part of."
+      zh_TW: "[zh_TW] A group chat he wasn't part of."
+      zh_CN: "[zh_CN] A group chat he wasn't part of."
+    intent: "本当の複雑化——除外という具体的な事実"
+
+  - panel_id: ep009_010
+    scene: |
+      彩が立ち上がり、書類をまとめながら、スマホには触れずに話題を変える。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: 気にしないで。今夜、練習だから。
+        en_US: "Don't worry about it. Practice is tonight."
+        zh_TW: "[zh_TW] Don't worry about it. Practice is tonight."
+        zh_CN: "[zh_CN] Don't worry about it. Practice is tonight."
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "説明せずに話をそらす彩——嘘はつかない、しかし全ては語らない"
+
+  - panel_id: ep009_011
+    scene: |
+      再びLINEの画面。彩が投稿した「今日19:00、体育館で練習」の文字。
+      既読が次々についていくが、返信は誰からも来ない。スタンプが
+      一つだけ。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: 普段なら、この時間にはもう文句と冗談で埋まっているはずの
+        スレッドが、今日は親指マーク一つだけで止まっている。
+      en_US: "On a normal week the team would already have flooded this
+        thread with jokes and complaints. Today: one thumbs-up. Nothing
+        else."
+      zh_TW: "[zh_TW] On a normal week the team would already have
+        flooded this thread with jokes and complaints. Today: one
+        thumbs-up. Nothing else."
+      zh_CN: "[zh_CN] On a normal week the team would already have
+        flooded this thread with jokes and complaints. Today: one
+        thumbs-up. Nothing else."
+    intent: "沈黙の伝播——謝罪だけでなく、練習連絡そのものが静まっている"
+
+  - panel_id: ep009_012
+    scene: |
+      隼人がチャットを遡る。一件だけ、今朝早くに届いていた動画——桐生製薬の
+      桐生蓮が、フリースローを一本も外さずに続ける練習風景。添えられた
+      言葉はただ一つ、「次、これと当たるらしい」。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 「次、これと当たるらしい。」松尾が朝はやくに送った動画には、
+        それだけ添えられていた。
+      en_US: "'Guess this is who we play next.' That was the only comment
+        on the clip Matsuo sent before anyone else was even awake —
+        Kiryuu Ren, their next rival, sinking free throw after free
+        throw, not missing once."
+      zh_TW: "[zh_TW] 'Guess this is who we play next.' That was the
+        only comment on the clip Matsuo sent before anyone else was even
+        awake — Kiryuu Ren, their next rival, sinking free throw after
+        free throw, not missing once."
+      zh_CN: "[zh_CN] 'Guess this is who we play next.' That was the
+        only comment on the clip Matsuo sent before anyone else was even
+        awake — Kiryuu Ren, their next rival, sinking free throw after
+        free throw, not missing once."
+    intent: "沈黙を破った唯一のもの——支えではなく、冷たい偵察情報"
+
+  - panel_id: ep009_013
+    scene: |
+      隼人の顎のタイトクローズアップ。スマホの画面はまだ点いたまま。
+      誰も彼への当てつけとして送ったわけではない——それがかえって重い。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "ページ1の閉じ——朝の重さが積み重なったまま、場面が変わる"
+
+- page_id: ep_009_p02
+  panels:
+  - panel_id: ep009_014
+    scene: |
+      夕方、会社の古い体育館。まだ誰も来ていない。隼人は机の引き出しに
+      しまっていた使い古したスニーカーに履き替える。
+    beat_type: standard
+    silence_confirmed: true
+    intent: "視覚アンカーの帰還——場面転換の合図"
+
+  - panel_id: ep009_015
+    scene: |
+      誰もいない床で、隼人は一人でダッシュを繰り返す。息が上がり、
+      膝に手をついて肩で息をする。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 脚が先。肺が後から追いつく。息が思考を追い越すまで、彼は
+        走り続ける。
+      en_US: "Legs first. Lungs after. He runs until his breath outruns
+        his thoughts."
+      zh_TW: "[zh_TW] Legs first. Lungs after. He runs until his breath
+        outruns his thoughts."
+      zh_CN: "[zh_CN] Legs first. Lungs after. He runs until his breath
+        outruns his thoughts."
+    intent: "身体的代償の可視化——オフゲームの回でも失われない"
+
+  - panel_id: ep009_016
+    scene: |
+      遠藤たちが次々と入ってくる。「おす」「よろしくー」——いつも通りの
+      声のトーンだが、隼人にだけ、視線が一瞬遅れて外れる。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: よろしく。
+        en_US: "Hey."
+        zh_TW: "[zh_TW] Hey."
+        zh_CN: "[zh_CN] Hey."
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "チームの摩擦——言葉ではなく、間合いのずれとして"
+
+  - panel_id: ep009_017
+    scene: |
+      彩がドリルの指示を出す。二人一組でのパス回し。表向きは、いつも通りの
+      練習が始まる。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: 今日は基礎から。パス、フットワーク、ハーフコート。
+        en_US: "Basics today. Passing, footwork, half-court."
+        zh_TW: "[zh_TW] Basics today. Passing, footwork, half-court."
+        zh_CN: "[zh_CN] Basics today. Passing, footwork, half-court."
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_center
+    intent: "表向きの平常——練習という舞台にまで及ぶ仮面"
+
+  - panel_id: ep009_018
+    scene: |
+      用具庫へボールを取りに行った隼人。薄暗がりの奥に、遠藤と松尾の
+      影が見える。二人は隼人に気づいていない。
+    beat_type: micro
+    intent: "立ち聞きの設定——隼人と同じ立場で情報を受け取る読者"
+
+  - panel_id: ep009_019
+    scene: |
+      遠藤の低い声。悪気はないが、率直すぎる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: ……次も隼人でいくのか?
+        en_US: "...are we seriously starting Hayato again next time?"
+        zh_TW: "[zh_TW] ...are we seriously starting Hayato again next
+          time?"
+        zh_CN: "[zh_CN] ...are we seriously starting Hayato again next
+          time?"
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "疑いの直接的な言語化——このエピソードの核となる痛み"
+
+  - panel_id: ep009_020
+    scene: |
+      松尾が目をそらしたまま、床に向かって答える。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: matsuo
+      text_by_locale:
+        ja_JP: 悪気はないけど……あの場面、正直こわかった。
+        en_US: "No offense to him, but — that moment scared me. Honestly."
+        zh_TW: "[zh_TW] No offense to him, but — that moment scared me.
+          Honestly."
+        zh_CN: "[zh_CN] No offense to him, but — that moment scared me.
+          Honestly."
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    intent: "疑いが遠藤一人のものではないことの確認——複数形の『チーム
+      メイト』"
+
+  - panel_id: ep009_021
+    scene: |
+      隼人は動けない。ボールを胸に抱えたまま、用具庫の陰に立ち尽くす。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "凍りついた反応——誰も解決を急がせない一拍"
+
+  - panel_id: ep009_022
+    scene: |
+      彩が用具庫に入ってきて、空気に気づく。遠藤に向かって、はっきりと
+      言う。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: 一回のミスで、外す理由にはならない。
+        en_US: "One mistake isn't a reason to pull him from the lineup."
+        zh_TW: "[zh_TW] One mistake isn't a reason to pull him from the
+          lineup."
+        zh_CN: "[zh_CN] One mistake isn't a reason to pull him from the
+          lineup."
+      intensity: sharp
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    - speaker: endou
+      text_by_locale:
+        ja_JP: ……そうは言ってない。
+        en_US: "...That's not what I said."
+        zh_TW: "[zh_TW] ...That's not what I said."
+        zh_CN: "[zh_CN] ...That's not what I said."
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    intent: "彩の擁護——一般論ではなく、具体的な反論として"
+
+  - panel_id: ep009_023
+    scene: |
+      遠藤の組んでいた腕が少しだけ緩む。だが撤回はしない。松尾は目を
+      そらしたまま、どちらの味方にもならない。
+    beat_type: micro
+    intent: "解決しない疑い——擁護によって消えるわけではない"
+
+  - panel_id: ep009_024
+    scene: |
+      誰も何も言わない。松尾は視線を外したまま。体育館のこの一角の
+      沈黙は、あの既読だけのグループトークと同じ形をしている。
+    beat_type: standard
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      ja_JP: 誰も言い返さなかった。誰も同意もしなかった。
+      en_US: "No one argued with her. No one agreed out loud either. It
+        was the same silence as the chat — just louder, because it had
+        a room around it."
+      zh_TW: "[zh_TW] No one argued with her. No one agreed out loud
+        either. It was the same silence as the chat — just louder,
+        because it had a room around it."
+      zh_CN: "[zh_CN] No one argued with her. No one agreed out loud
+        either. It was the same silence as the chat — just louder,
+        because it had a room around it."
+    intent: "テーゼの反響——沈黙という一つのイメージが、画面とチャットの
+      両方で同じ形を持つ"
+
+  - panel_id: ep009_025
+    scene: |
+      同じワイドショットの奥で、黒田がいつも通りボールラックを黙って
+      整えている。誰も気づかない。この張りつめた空気にも一切反応しない。
+    beat_type: spatial
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      ja_JP: 誰も彼を"コーチ"とは呼ばない。それでも、彼はそういう存在
+        だった。
+      en_US: "No one calls him coach. That's just what he is, back there,
+        resetting the rack no one asked him to reset."
+      zh_TW: "[zh_TW] No one calls him coach. That's just what he is,
+        back there, resetting the rack no one asked him to reset."
+      zh_CN: "[zh_CN] No one calls him coach. That's just what he is,
+        back there, resetting the rack no one asked him to reset."
+    intent: "黒田の一貫した沈黙——この回では言葉を得ない、ep_010への伏線"
+
+  - panel_id: ep009_026
+    scene: |
+      練習を終えた部員たちが帰っていく中、隼人だけがフリースローラインに
+      残る。ポケットの中でスマホが一度だけ震える。彼は見ない。何でもない
+      一本を放つ。ボールがリムに触れる。体育館は暗くなっていき、窓の
+      明かりが一つだけ残る。
+    beat_type: long_drop
+    silence_confirmed: false
+    narrator_caption_by_locale:
+      ja_JP: 既読はついている。それだけだ。今夜、まだ何も終わっていない。
+      en_US: "The messages were still just read, not answered. Nothing
+        about tonight had actually ended."
+      zh_TW: "[zh_TW] The messages were still just read, not answered.
+        Nothing about tonight had actually ended."
+      zh_CN: "[zh_CN] The messages were still just read, not answered.
+        Nothing about tonight had actually ended."
+    dialogue_lines: []
+    intent: "未解決の閉じ——クリーンな解決を意図的に避ける"
+
+notes:
+  arc_position: |
+    12話中の第9話。ep_007の敗戦（隼人自身の明確なミスによる）と、ep_008で
+    導入された桐生蓮という鏡像的ライバルの直後に位置する、感情の落とし穴の
+    回。焦点は「沈黙」という一つの現代的オブジェクト（LINEグループトーク）を、
+    まずチャット画面で、次に体育館という物理空間で、二重に反復させること。
+    クリーンな解決は意図的に避けており、彩の擁護もチーム全体の合意には
+    至らない。ep_010で黒田が初めて言葉を得る前の、最も痛みが残ったままの
+    回として設計した。
+  pacing_vs_prior: |
+    26コマ、2ページ構成。stillness_press ep_011テンプレートと同等の密度・
+    粒度を目標としつつ、本作の直近の姉妹エピソード（ep_002: 30コマ5ページ、
+    ep_006: 28コマ5ページ）よりやや短く、オフゲーム回にふさわしい抑制した
+    テンポを採用した。
+  continuity_callbacks: |
+    - 前腕の擦り傷（パネル1）——ep_007の敗戦の身体的痕跡が三日後も残る。
+    - 指の関節タップの癖（パネル4）——別の種類の負荷に対する再来。
+    - 机の引き出しのスニーカー（パネル14）——ep_002由来の視覚アンカーの
+      継続。
+    - 黒田のラック整理（パネル25）——ep_002/ep_006と一貫したリズム、
+      台詞なし。ep_010で初めて言葉を得る伏線を維持。
+    - 桐生蓮（パネル12）——ep_008で導入されたライバルが、動画という
+      形で本人不在のまま再登場し、この回の痛みを増幅させる。
+  doctrinal_anchor_vessel_handling: |
+    「力を抜かせるコーチ」というヴィジョンは、この回ではまだ発動しない。
+    黒田は完全に沈黙のまま、背景の一貫した所作のみで存在する。強化ルール
+    に従い、コーチ役も彩も遠藤も、隼人の心理を言語化する台詞は一切
+    発していない——既読、グループトーク、動画、ボールラックという具体的な
+    オブジェクトと行動だけで、疑いと擁護の両方を運んでいる。ep_010で
+    黒田がコンビニのレシートを使って初めて三語以内の言葉を発するまで、
+    この抑制は続く。
+  translation_handoff: |
+    text_by_locale辞書はja_JP（権威）とen_US（実訳）を実装。zh_TW/zh_CNは
+    heart_balance_shojo ep_001およびep_002の規約に従い、対応するen_US行を
+    角括弧プレースホルダーで保持し（例: '[zh_TW] <en_US line>'）、別レーンの
+    翻訳品質プログラムに引き継ぐ。

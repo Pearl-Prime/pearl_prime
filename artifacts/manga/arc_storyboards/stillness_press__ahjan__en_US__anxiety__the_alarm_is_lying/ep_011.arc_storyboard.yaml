@@ -1,0 +1,382 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_011
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 11: The Room Is Bigger'
+logline: A calendar notification silently triples the size of Mira's Thursday
+  presentation, forcing her to test six episodes of private practice in front
+  of a room she never agreed to prepare for.
+stakes_now: Mira has only ever practiced noticing her alarm alone, at a distance
+  from colleagues, or in front of family — never inside a real, public,
+  professionally consequential room.
+stakes_end: The presentation was imperfect, not catastrophic; a colleague,
+  Devon, witnessed the private gesture for the first time, opening a thread
+  that did not exist before this episode.
+genre_cadence:
+- established_calm_desk_opening
+- escalated_activation_trigger
+- body_register_amplified
+- new_character_introduction
+- mirrored_activation_in_transit
+- scale_reveal
+- proceed_despite_unresolved_activation
+- public_stumble_and_recovery
+- reality_check_reversal
+- delayed_activation_release
+- gesture_witnessed_turn
+- closing_return
+page_turn_promises:
+- page_id: ep_011_p01
+  promise: Will the meeting Mira prepared for still be the meeting she has to
+    give?
+- page_id: ep_011_p02
+  promise: Can the private practice hold up inside a room this size, in front
+    of people who are actually watching?
+panels:
+- panel_id: ep011_001
+  page_id: ep_011_p01
+  story_function: established_calm_desk_opening
+  story_move: The episode opens on an ordinary workday baseline, establishing
+    the succulent's migration from home to office as a quiet sign of the
+    practice becoming portable.
+  visual_proof: Wide desk shot, laptop open, relocated succulent beside the
+    monitor, ordinary morning calm.
+  information_delta: Reader sees the practice has continued off-panel between
+    episodes without being narrated.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_002
+  page_id: ep_011_p01
+  story_function: escalated_activation_trigger
+  story_move: The same calendar-notification mechanic from ep_002 returns, now
+    escalated into silent scope-creep rather than a scheduled invite.
+  visual_proof: Laptop screen close-up, calendar notification reading Updated
+    Thursday 2pm plus twelve attendees added.
+  information_delta: Reader knows the meeting's scale just changed without
+    warning.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_003
+  page_id: ep_011_p01
+  story_function: escalated_activation_trigger
+  story_move: Mira's confusion resolves into recognition of the alarm arriving,
+    a beat slower than the trigger itself.
+  visual_proof: Tight face close-up, half-second of confusion shifting to
+    alertness.
+  information_delta: Reader tracks the lag between event and bodily response.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_004
+  page_id: ep_011_p01
+  story_function: escalated_activation_trigger
+  story_move: The abstract dread becomes concrete and rank-specific once Mira
+    reads the actual attendee names.
+  visual_proof: Screen detail, director and VP names populating the invite
+    list.
+  information_delta: Reader knows exactly who raised the stakes, not just that
+    stakes rose.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_005
+  page_id: ep_011_p01
+  story_function: body_register_amplified
+  story_move: The trembling-hand motif from ep_001 returns at a visibly larger
+    amplitude, proving the same physiology now carries bigger stakes.
+  visual_proof: Close on a pale-knuckled hand gripping the desk edge.
+  information_delta: Reader measures escalation against the series' established
+    baseline gesture.
+  beat_role: somatic_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_006
+  page_id: ep_011_p01
+  story_function: body_register_amplified
+  story_move: Mira reaches for the established pendant anchor under a bigger
+    load than it has ever been asked to answer.
+  visual_proof: Close on fingers touching the jade pendant, slow breath.
+  information_delta: Reader sees the ritual gesture being tested at a new
+    scale, not replaced with a new technique.
+  beat_role: ground_attempt
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_007
+  page_id: ep_011_p01
+  story_function: new_character_introduction
+  story_move: A new colleague, Devon, is introduced showing his own visible
+    activation before any dialogue names it.
+  visual_proof: Wide office-floor shot, Devon re-reading papers near the
+    printer, clicking a pen cap rapidly.
+  information_delta: Reader meets a second character whose anxiety register
+    mirrors Mira's own established tells.
+  beat_role: mirror_introduced
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_008
+  page_id: ep_011_p01
+  story_function: new_character_introduction
+  story_move: Devon approaches and names the shared trigger directly, forcing
+    Mira into the role of the calmer-seeming one for the first time in the
+    series.
+  visual_proof: Devon at Mira's desk, slides in hand, forced-casual posture.
+  information_delta: Reader learns Devon is co-presenting, raising Mira's
+    stakes further.
+  beat_role: mirror_introduced
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_009
+  page_id: ep_011_p01
+  story_function: new_character_introduction
+  story_move: Mira answers honestly rather than reassuringly, refusing to
+    minimize the change in scope.
+  visual_proof: Mira still holding the pendant, meeting Devon's eyes before
+    answering.
+  information_delta: Reader sees Mira choosing honesty over false calm,
+    consistent with the series' anti-cure stance.
+  beat_role: mirror_introduced
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_010
+  page_id: ep_011_p02
+  story_function: mirrored_activation_in_transit
+  story_move: The elevator ride compounds tension in a confined space, echoing
+    ep_002's own commute-to-meeting structure.
+  visual_proof: Elevator interior, both carrying folders, ambient pen-cap
+    clicking.
+  information_delta: Reader tracks rising activation in real time during
+    transit, not just at the trigger and the room.
+  beat_role: escalation_transit
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_011
+  page_id: ep_011_p02
+  story_function: mirrored_activation_in_transit
+  story_move: Devon's visible tell is witnessed by Mira without comment,
+    seeding the recognition that pays off later in the episode.
+  visual_proof: Close on Devon's hand, pen cap clicking fast.
+  information_delta: Reader sees Mira noticing someone else's activation for
+    the first time in the series.
+  beat_role: escalation_transit
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_012
+  page_id: ep_011_p02
+  story_function: scale_reveal
+  story_move: The room itself becomes the visual proof of escalated stakes,
+    larger than any workplace setting shown previously.
+  visual_proof: Wide glass-walled conference room reveal, long table, city
+    skyline, more chairs than expected.
+  information_delta: Reader confirms the scale of the room matches the scale
+    of the earlier notification.
+  beat_role: scale_reveal
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_013
+  page_id: ep_011_p02
+  story_function: scale_reveal
+  story_move: Both characters hesitate at the threshold a beat too long, neither
+    stepping through first.
+  visual_proof: Medium two-shot at the doorway, neither moving.
+  information_delta: Reader feels the shared hesitation before either steps
+    forward.
+  beat_role: scale_reveal
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_014
+  page_id: ep_011_p02
+  story_function: proceed_despite_unresolved_activation
+  story_move: Mira chooses the door handle over the pendant, proceeding into
+    the room while the activation is still unresolved.
+  visual_proof: Close on a hand releasing the pendant and reaching for the
+    door handle.
+  information_delta: Reader sees the doctrine's real escalation, acting
+    without waiting for calm first.
+  beat_role: threshold_choice
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_015
+  page_id: ep_011_p02
+  story_function: proceed_despite_unresolved_activation
+  story_move: The room is confirmed to be exactly as full as the notification
+    promised, no exaggeration.
+  visual_proof: Wide interior shot, directors and VPs seated, slides projected.
+  information_delta: Reader sees the stakes made literal and occupied.
+  beat_role: threshold_choice
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_016
+  page_id: ep_011_p02
+  story_function: public_stumble_and_recovery
+  story_move: Mira genuinely stumbles mid-sentence, giving the practice a real,
+    imperfect public test rather than a clean success.
+  visual_proof: Close on Mira's face mid-sentence, a repeated word, a visible
+    blank.
+  information_delta: Reader sees the practice fail momentarily, honest to the
+    series' no-cure stance.
+  beat_role: public_test
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_017
+  page_id: ep_011_p02
+  story_function: public_stumble_and_recovery
+  story_move: Mira uses the private anchor gesture inside a public moment,
+    unseen by the room but seen by the reader.
+  visual_proof: Tight shot on a hand touching the pendant beneath the table
+    edge, out of the room's sightline.
+  information_delta: Reader learns the private practice can operate invisibly
+    inside a public failure.
+  beat_role: public_test
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_018
+  page_id: ep_011_p02
+  story_function: public_stumble_and_recovery
+  story_move: Mira recovers the sentence, imperfect delivery rather than
+    flawless delivery.
+  visual_proof: Mira mid-recovery, steadier voice, slides still up.
+  information_delta: Reader sees recovery, not erasure, of the stumble.
+  beat_role: public_test
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_019
+  page_id: ep_011_p02
+  story_function: reality_check_reversal
+  story_move: The room's actual reaction is shown to be far smaller than the
+    imagined cost, a direct reversal of the alarm's prediction.
+  visual_proof: Wide room shot, a director nodding and taking a note,
+    unbothered.
+  information_delta: Reader sees the gap between predicted and actual social
+    cost made visible.
+  beat_role: reality_check
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_020
+  page_id: ep_011_p02
+  story_function: delayed_activation_release
+  story_move: Devon's own activation resolves on a delayed timer after the
+    meeting ends, distinct from Mira's real-time coping.
+  visual_proof: Hallway shot, Devon exhaling hard, shoulders dropping.
+  information_delta: Reader sees a second character's activation pattern,
+    different in timing from Mira's.
+  beat_role: post_event_release
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_021
+  page_id: ep_011_p02
+  story_function: delayed_activation_release
+  story_move: Mira stays present without narrating anything, offering
+    companionship rather than advice.
+  visual_proof: Mira beside Devon in the hallway, both visibly tired the same
+    way.
+  information_delta: Reader sees restraint modeled as its own form of support.
+  beat_role: post_event_release
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_022
+  page_id: ep_011_p02
+  story_function: gesture_witnessed_turn
+  story_move: Devon directly names what he saw, turning the previously private
+    gesture into a shared fact between them.
+  visual_proof: Devon, quieter tone, asking about the hand gesture under the
+    table.
+  information_delta: Reader learns the practice was witnessed, not invisible
+    as assumed.
+  beat_role: gesture_witnessed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_023
+  page_id: ep_011_p02
+  story_function: gesture_witnessed_turn
+  story_move: Mira registers being caught, the episode's actual turn — the
+    practice has just become visible to someone else for the first time in
+    the series.
+  visual_proof: Close on Mira's face, mildly caught off guard.
+  information_delta: Reader confirms this is a first for the series, not a
+    repeat beat.
+  beat_role: gesture_witnessed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_024
+  page_id: ep_011_p02
+  story_function: gesture_witnessed_turn
+  story_move: Mira defers the explanation rather than either refusing or
+    over-explaining, setting the direct hook into ep_012.
+  visual_proof: Mira, small honest half-smile, proposing Friday coffee.
+  information_delta: Reader receives the explicit narrative bridge to the next
+    episode.
+  beat_role: gesture_witnessed
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_025
+  page_id: ep_011_p02
+  story_function: closing_return
+  story_move: Both walk back at an unhurried pace, the room shrinking behind
+    them, marking the shift from crisis to resolution.
+  visual_proof: Wide hallway shot, room receding in perspective.
+  information_delta: Reader feels the pace of the episode slow toward close.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_026
+  page_id: ep_011_p02
+  story_function: closing_return
+  story_move: The tea-beat bookend returns in an evening register for the
+    first time in the series, marking a full day passed rather than a single
+    morning.
+  visual_proof: Kitchen kettle shot, city lights through the window instead of
+    dawn light.
+  information_delta: Reader tracks a new time-of-day variation on the
+    established ritual.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_027
+  page_id: ep_011_p02
+  story_function: closing_return
+  story_move: The episode closes on the thesis restated in miniature, the
+    hand under the table unchanged in size despite the bigger room around it.
+  visual_proof: Mira at the table with tea, the succulent's home cutting on
+    the sill.
+  information_delta: Reader receives the episode's closing thesis line as the
+    final beat.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.yaml
+notes: Freshly authored (not backfilled) as arc 1's escalation episode, closing
+  the pilot-wave gap identified after ep_001-010 backfill landed (PRs 135 and
+  140). Introduces Devon, seeded specifically to pay off in ep_012. Follows the
+  same storyboard-first sequence used for the ep_001-010 backfill.

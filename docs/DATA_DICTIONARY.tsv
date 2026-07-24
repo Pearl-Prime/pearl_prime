@@ -1,6 +1,8 @@
 path	purpose	subsystem	owner	consumers	status
 scripts/ci/check_accent_flagship_truth.py	CI drift/readiness gate (check_accent_flagship_truth.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_accent_plan_assignment.py	CI drift/readiness gate (check_accent_plan_assignment.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_accent_supply_preflight.py	CI drift/readiness gate (check_accent_supply_preflight.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_acceptance_claim_language.py	CI drift/readiness gate (check_acceptance_claim_language.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_agent_registry.py	CI drift/readiness gate (check_agent_registry.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_artifact_retention.py	CI drift/readiness gate (check_artifact_retention.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_atoms_external_book_references.py	CI drift/readiness gate (check_atoms_external_book_references.py)	ci	Pearl_GitHub	.github/workflows	WIRED
@@ -18,6 +20,8 @@ scripts/ci/check_brand_wizard_ja_hardcoded_en.py	CI drift/readiness gate (check_
 scripts/ci/check_canonical_atom_parse_sweep.py	CI drift/readiness gate (check_canonical_atom_parse_sweep.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_canonical_pipeline_path.py	CI drift/readiness gate (check_canonical_pipeline_path.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_capability_regression.py	CI drift/readiness gate (check_capability_regression.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_catalog_manifest_acceptance_layer.py	CI drift/readiness gate (check_catalog_manifest_acceptance_layer.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_catalog_ship_wrap_defect4.py	CI drift/readiness gate (check_catalog_ship_wrap_defect4.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_catalog_spam.py	CI drift/readiness gate (check_catalog_spam.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_chapter_object_continuity.py	CI drift/readiness gate (check_chapter_object_continuity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_church_yaml_no_sensitive_tokens.py	CI drift/readiness gate (check_church_yaml_no_sensitive_tokens.py)	ci	Pearl_GitHub	.github/workflows	WIRED
@@ -31,6 +35,7 @@ scripts/ci/check_enhancement_contract_v21.py	CI drift/readiness gate (check_enha
 scripts/ci/check_exercise_slot_contract.py	CI drift/readiness gate (check_exercise_slot_contract.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_export_no_bypass.py	CI drift/readiness gate (check_export_no_bypass.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_external_buy_links.py	CI drift/readiness gate (check_external_buy_links.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_f1h_templated_cluster_hard.py	CI drift/readiness gate (check_f1h_templated_cluster_hard.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_flagship_book_parity.py	CI drift/readiness gate (check_flagship_book_parity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_flagship_chapter_shape.py	CI drift/readiness gate (check_flagship_chapter_shape.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_flagship_contract.py	CI drift/readiness gate (check_flagship_contract.py)	ci	Pearl_GitHub	.github/workflows	WIRED
@@ -39,15 +44,18 @@ scripts/ci/check_flagship_exercise_five_layer.py	CI drift/readiness gate (check_
 scripts/ci/check_format_duration_contracts.py	CI drift/readiness gate (check_format_duration_contracts.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_harbor_production_truth_labeling.py	CI drift/readiness gate (check_harbor_production_truth_labeling.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_integration_env.py	CI drift/readiness gate (check_integration_env.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_lean_best_book_parity.py	CI drift/readiness gate (check_lean_best_book_parity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_manga_serial_spine.py	CI drift/readiness gate (check_manga_serial_spine.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_manga_story_authored.py	CI drift/readiness gate (check_manga_story_authored.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_manga_story_engine.py	CI drift/readiness gate (check_manga_story_engine.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_manga_wiring.py	CI drift/readiness gate (check_manga_wiring.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_marketing_config.py	CI drift/readiness gate (check_marketing_config.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_metricool_managed.py	CI drift/readiness gate (check_metricool_managed.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_music_brand_diversity.py	CI drift/readiness gate (check_music_brand_diversity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_native_check.py	CI drift/readiness gate (check_native_check.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_norcal_dharma_brand_guards.py	CI drift/readiness gate (check_norcal_dharma_brand_guards.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_ollama_models.py	CI drift/readiness gate (check_ollama_models.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_orient_ch1_scene_anchor.py	CI drift/readiness gate (check_orient_ch1_scene_anchor.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_pearl_news_sidebar_parity.py	CI drift/readiness gate (check_pearl_news_sidebar_parity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_pearl_star_runner_online.py	CI drift/readiness gate (check_pearl_star_runner_online.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_platform_similarity.py	CI drift/readiness gate (check_platform_similarity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
@@ -59,18 +67,22 @@ scripts/ci/check_research_fit_honesty.py	CI drift/readiness gate (check_research
 scripts/ci/check_series_content_uniqueness.py	CI drift/readiness gate (check_series_content_uniqueness.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_series_metadata_intent.py	CI drift/readiness gate (check_series_metadata_intent.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_series_open_close_collision.py	CI drift/readiness gate (check_series_open_close_collision.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_social_post_variation.py	CI drift/readiness gate (check_social_post_variation.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_social_visual_parity.py	CI drift/readiness gate (check_social_visual_parity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_spine_packet_integrity.py	CI drift/readiness gate (check_spine_packet_integrity.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_structural_entropy.py	CI drift/readiness gate (check_structural_entropy.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_system_governance_status.py	CI drift/readiness gate (check_system_governance_status.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_teacher_photo_drift.py	CI drift/readiness gate (check_teacher_photo_drift.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_teacher_readiness.py	CI drift/readiness gate (check_teacher_readiness.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_teacher_synthetic_governance.py	CI drift/readiness gate (check_teacher_synthetic_governance.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_title_language_conformance.py	CI drift/readiness gate (check_title_language_conformance.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_variation_manifest.py	CI drift/readiness gate (check_variation_manifest.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_voice_audition_contract.py	CI drift/readiness gate (check_voice_audition_contract.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_wave_density.py	CI drift/readiness gate (check_wave_density.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_waystream_catalog_uniqueness.py	CI drift/readiness gate (check_waystream_catalog_uniqueness.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_western_lane_format.py	CI drift/readiness gate (check_western_lane_format.py)	ci	Pearl_GitHub	.github/workflows	WIRED
-config/source_of_truth/doctrine_rotation.yaml	config entry (doctrine_rotation.yaml)	config	Pearl_Architect	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
+scripts/ci/check_zh_tw_simplified_contamination.py	CI drift/readiness gate (check_zh_tw_simplified_contamination.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+config/source_of_truth/doctrine_rotation.yaml	config entry (doctrine_rotation.yaml)	config	Pearl_Architect	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;phoenix_v4/social/media_selector.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
 SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION	composite-doctrine REFLECTION bank (anxiety)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/composite_doctrine/boundaries/REFLECTION	composite-doctrine REFLECTION bank (boundaries)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/composite_doctrine/burnout/REFLECTION	composite-doctrine REFLECTION bank (burnout)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
@@ -97,7 +109,8 @@ SOURCE_OF_TRUTH/exercises_v4/approved/07_self_contact_touch.yaml	approved five-l
 SOURCE_OF_TRUTH/exercises_v4/approved/08_emotional_processing_completion.yaml	approved five-layer-lane exercise body (08_emotional_processing_completion.yaml)	exercise_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/exercises_v4/approved/09_embodied_intention_direction.yaml	approved five-layer-lane exercise body (09_embodied_intention_direction.yaml)	exercise_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/exercises_v4/approved/10_integration_return_to_baseline.yaml	approved five-layer-lane exercise body (10_integration_return_to_baseline.yaml)	exercise_bank	Pearl_Editor	-	KNOWN_UNWIRED
-phoenix_v4/planning/doctrine_rotation.py	planning entry (doctrine_rotation.py)	planning	Pearl_Prime	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
+phoenix_v4/planning/doctrine_rotation.py	planning entry (doctrine_rotation.py)	planning	Pearl_Prime	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;phoenix_v4/social/media_selector.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
+.github/workflows/accent-supply-preflight.yml	GitHub Actions workflow (accent-supply-preflight.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED
 .github/workflows/atoms-external-ref-audit.yml	GitHub Actions workflow (atoms-external-ref-audit.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED
 .github/workflows/atoms-parse-sweep.yml	GitHub Actions workflow (atoms-parse-sweep.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED
 .github/workflows/audiobook-regression.yml	GitHub Actions workflow (audiobook-regression.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED

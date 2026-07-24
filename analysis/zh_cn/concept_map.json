@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "locale": "zh-CN",
+  "notes": "Recurring coined concepts/motifs identified from real corpus reading (2026-07-22 sample: atoms/tech_finance_burnout/overthinking, atoms/working_parents/mindfulness, atoms/corporate_managers/compassion_fatigue, atoms/corporate_managers/people_pleasing, atoms/first_responders/financial_anxiety, atoms/midlife_women/overthinking). Each concept must resolve to exactly one locked zh-CN rendering everywhere it recurs, per glossary_project.yaml.",
+  "concepts": [
+    {
+      "concept_id": "compassion_fatigue",
+      "english_forms": ["compassion fatigue", "the compassion fatigue"],
+      "zh_cn_canonical": "共情耗竭",
+      "risk_tier": "critical_recurring",
+      "personas": ["corporate_managers"],
+      "sample_source": "atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt",
+      "role": "named condition the character-study arc is structured around; appears in HOOK/STORY/REFLECTION/TAKEAWAY"
+    },
+    {
+      "concept_id": "empathy_tank_empty",
+      "english_forms": ["the empathy tank empty", "empathy tank empty"],
+      "zh_cn_canonical": "共情耗尽",
+      "risk_tier": "critical_recurring",
+      "personas": ["corporate_managers"],
+      "sample_source": "atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt",
+      "role": "end-state motif noun-phrase, distinct from the mechanism motifs below"
+    },
+    {
+      "concept_id": "caring_past_capacity",
+      "english_forms": ["the caring past capacity", "caring past capacity"],
+      "zh_cn_canonical": "关心超出了承受范围",
+      "risk_tier": "critical_recurring",
+      "personas": ["corporate_managers"],
+      "sample_source": "atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt",
+      "role": "overextension mechanism motif"
+    },
+    {
+      "concept_id": "giving_without_refill",
+      "english_forms": ["the giving without refill"],
+      "zh_cn_canonical": "只出不进的付出",
+      "risk_tier": "critical_recurring",
+      "personas": ["corporate_managers"],
+      "sample_source": "atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt",
+      "role": "resource-depletion motif"
+    },
+    {
+      "concept_id": "people_pleasing",
+      "english_forms": ["people-pleasing", "people pleasing"],
+      "zh_cn_canonical": "讨好型行为",
+      "zh_cn_body_form": "讨好",
+      "risk_tier": "critical_recurring",
+      "personas": ["corporate_managers"],
+      "sample_source": "atoms/corporate_managers/people_pleasing/EXERCISE/CANONICAL.txt",
+      "role": "named condition + behavior label used inside EXERCISE instructions as a quotable self-statement"
+    },
+    {
+      "concept_id": "money_watcher",
+      "english_forms": ["money watcher", "the watcher"],
+      "zh_cn_canonical": "财务监视者",
+      "zh_cn_body_form": "时刻盯着账户的状态",
+      "risk_tier": "critical_recurring",
+      "personas": ["first_responders"],
+      "sample_source": "atoms/first_responders/financial_anxiety/watcher/CANONICAL.txt",
+      "role": "financial hypervigilance motif; 'watcher' also recurs as an atom-shape name across other personas (anxiety/watcher) — do not conflate the shape name with this specific motif when locking translations"
+    },
+    {
+      "concept_id": "the_loop",
+      "english_forms": ["the loop", "the compounding optimization problem", "background CPU", "high-priority background thinking"],
+      "zh_cn_canonical": "思维循环",
+      "risk_tier": "critical_recurring",
+      "personas": ["tech_finance_burnout"],
+      "sample_source": "atoms/tech_finance_burnout/overthinking/SCENE/CANONICAL.txt",
+      "role": "sustained computing metaphor for rumination running across 30 SCENE variants; anchor term is 循环/思维循环, peripheral jargon (CPU/threads/cores) may be softened per style_guide_zh_cn.yaml"
+    },
+    {
+      "concept_id": "logistics_load",
+      "english_forms": ["invisible logistics load", "three logistics ahead"],
+      "zh_cn_canonical": "隐形的后勤负担",
+      "risk_tier": "high",
+      "personas": ["working_parents"],
+      "sample_source": "atoms/working_parents/mindfulness/PIVOT/CANONICAL.txt",
+      "role": "working-parent mental-load motif in PIVOT reframes"
+    },
+    {
+      "concept_id": "post_mortem_self_review",
+      "english_forms": ["personal post-mortem", "running sentiment analysis on their word choice"],
+      "zh_cn_canonical": "事后复盘",
+      "risk_tier": "high",
+      "personas": ["tech_finance_burnout"],
+      "sample_source": "atoms/tech_finance_burnout/overthinking/SCENE/CANONICAL.txt",
+      "role": "workplace self-monitoring/rumination motif; 复盘 is standard Mainland business-register term for post-event review, natural fit"
+    }
+  ],
+  "known_gaps": [
+    "This is a first-pass concept map from a targeted sample of 6 files across 5 personas, not a full-corpus census. Expand during Phase 4 production as new critical_recurring motifs surface in other persona pools (gen_alpha_students, gen_z_professionals, entrepreneurs, healthcare_rns, gen_x_sandwich, gen_z_student, nyc_executives, educators, millennial_women_professionals) — none of those were directly sampled for motif extraction in this pass."
+  ]
+}

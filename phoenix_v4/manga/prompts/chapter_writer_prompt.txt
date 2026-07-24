@@ -12,4 +12,9 @@ Inputs for this run:
 Story architecture handoff excerpt (JSON fragment for this chapter):
 {story_chapter_json}
 
+If the story architecture handoff carries a modern_reader_context block (target_market,
+target_audience, market_surface_rule, and the hook mechanic tying the self-help topic to a
+concrete modern-reader-world device), preserve it verbatim as modern_reader_context on
+chapter_script_writer_handoff — do not drop, summarize, or reword it in transmission.
+
 Follow specs/MANGA_CHAPTER_WRITER_SPEC.md for panel structure and dual-view rules.

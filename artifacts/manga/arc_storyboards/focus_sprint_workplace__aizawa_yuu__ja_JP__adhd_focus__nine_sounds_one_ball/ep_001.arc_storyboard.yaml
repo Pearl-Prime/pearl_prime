@@ -1,0 +1,509 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_001
+genre_id: sports_competition
+title: '「静寂のフリースロー」 第1話「屋上のシュート」'
+logline: A suffocating strategy meeting sends new-hire Hayato fleeing to his
+  company's rooftop break area, where a stray basketball and a wordless
+  flashback to his high-school turnover collide — and a senpai he has never
+  spoken to watches his one instinctive shot land clean.
+stakes_now: Hayato has no team, no roster spot, and has not touched a
+  basketball competitively since the turnover that ended his high-school
+  career — the only proof his body still remembers the game is about to
+  happen entirely by accident, unwitnessed until it isn't.
+stakes_end: Hayato has been seen — one clean shot, one open invitation from
+  Aya to "just come look" at practice — and has answered with neither a yes
+  nor a no.
+genre_cadence:
+- cold_open_body_before_mind
+- commuter_tell_established
+- threshold_and_anchor
+- meeting_pressure_established
+- notebook_scatter_object
+- attention_fragments
+- overload_cost_voiced
+- meeting_ends_mask_request
+- private_mask_confirmed
+- threshold_departure
+- rooftop_space_reveal
+- body_cost_private_beat
+- flashback_transition
+- flashback_wound
+- flashback_return_present
+- object_arrival_body_before_mind
+- witness_entry_silent
+- stillness_seed_held_beat
+- technique_execution
+- recognition_and_reveal
+- mask_confirmed_recovery
+- invitation_offered
+- threshold_hesitation
+- closing_unresolved
+page_turn_promises:
+- page_id: ep_001_p01
+  promise: Will Hayato make it through the meeting still holding all of it
+    together, or does something finally slip in front of everyone?
+- page_id: ep_001_p02
+  promise: What is he actually escaping to on the rooftop, and what does his
+    body remember once no one is watching?
+- page_id: ep_001_p03
+  promise: Now that someone has seen the shot, does Hayato get to keep it
+    private?
+- page_id: ep_001_p04
+  promise: Does the invitation Aya just handed him get an answer, or does he
+    leave it exactly where it landed?
+panels:
+- panel_id: ep001_001
+  page_id: ep_001_p01
+  story_function: cold_open_body_before_mind
+  story_move: Cold open on the body before the mind — Hayato's hand gripping
+    a train strap in a packed morning car, half-untucked shirt already
+    visible, ID lanyard swinging with the train's motion.
+  visual_proof: Close insert, gripped hand on an overhead strap, badge
+    lanyard swinging, packed commuter bodies pressed in around him, no face
+    fully shown yet.
+  information_delta: Reader meets Hayato through his body and commute before
+    any workplace context is established.
+  beat_role: threshold_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_002
+  page_id: ep_001_p01
+  story_function: commuter_tell_established
+  story_move: The tell is established before the flaw is explained — his pen
+    taps his own knuckles on reflex while his phone buzzes unread in his
+    other hand, both things happening at once and neither getting his full
+    attention.
+  visual_proof: Medium shot inside the train car, phone screen lit with an
+    unopened chat notification, pen tapping knuckles, eyes middle-distance.
+  information_delta: Reader is shown the ADHD-coded tell (the knuckle tap)
+    and the divided-attention pattern before either is named.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_003
+  page_id: ep_001_p01
+  story_function: threshold_and_anchor
+  story_move: The office turnstile scans his badge green — the day's actual
+    start, rendered as a small mechanical event rather than narrated.
+  visual_proof: Close insert, badge reader flashing green, Hayato's hand
+    already lowering the badge, motion mid-stride.
+  information_delta: Reader confirms his workplace identity and role before
+    the meeting begins.
+  beat_role: threshold_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_004
+  page_id: ep_001_p01
+  story_function: threshold_and_anchor
+  story_move: At his desk, stashing his bag in the bottom drawer, an old pair
+    of sneakers is visible in the back corner for a beat before he shuts it
+    without acknowledging them — the visual anchor the series will return
+    to in ep_002.
+  visual_proof: Medium shot, drawer half-open, worn sneakers tucked in the
+    back, Hayato's hand already moving to close it.
+  information_delta: Reader learns he still keeps the sneakers "just in
+    case" without a single word of explanation.
+  beat_role: anchor_object
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_005
+  page_id: ep_001_p01
+  story_function: meeting_pressure_established
+  story_move: Kagawa, his section chief, summons the floor to the conference
+    room, naming the deadline before anyone has even sat down.
+  visual_proof: Medium shot, Kagawa half-turned from his own desk, voice
+    already carrying across the floor.
+  information_delta: Reader learns the concrete institutional pressure (a
+    Friday deadline) driving the coming meeting.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_006
+  page_id: ep_001_p01
+  story_function: meeting_pressure_established
+  story_move: Wide on the conference room — Kagawa still talking, a slide
+    already up, two side conversations starting before he finishes, the
+    room's noise-load established as a fact of the space, not commentary.
+  visual_proof: Wide shot, overlapping speech bubbles from three directions,
+    a projected slide, Hayato small in the frame among several colleagues.
+  information_delta: Reader sees the sensory-overload environment in full
+    before it becomes specifically Hayato's problem.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_007
+  page_id: ep_001_p01
+  story_function: notebook_scatter_object
+  story_move: Close on his meeting notebook — dense scattered notes trailing
+    off into an idle doodled circle, the pen unable to settle on a single
+    thread to follow.
+  visual_proof: Macro insert on the notebook page, disconnected phrases, one
+    doodled circle, pen hovering without landing.
+  information_delta: Reader sees the flaw rendered as a concrete object (the
+    notebook) rather than narrated interior state.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_008
+  page_id: ep_001_p02
+  story_function: attention_fragments
+  story_move: Tight on his eyes cutting between the slide, Kagawa's mouth, a
+    colleague's whispered aside, and his phone lighting up under the table —
+    four things competing for the same instant.
+  visual_proof: Extreme close-up on Hayato's eyes with four small inset
+    panels showing each thing his glance lands on.
+  information_delta: Reader gets the interior mechanism of the flaw rendered
+    visually, matching the eyes-dart device the series reuses in ep_002.
+  beat_role: eyes_dart
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_009
+  page_id: ep_001_p02
+  story_function: overload_cost_voiced
+  story_move: Interior beat — Hayato's own thought names the mismatch
+    honestly, without the meeting slowing down to wait for him.
+  visual_proof: Tight shot, dotless-tailed thought bubble, Hayato's
+    expression flat with effort.
+  information_delta: Reader hears the cost stated once, plainly, from
+    inside Hayato rather than from narration.
+  beat_role: somatic_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_010
+  page_id: ep_001_p02
+  story_function: meeting_ends_mask_request
+  story_move: Kagawa claps the meeting shut; a coworker hands Hayato a
+    follow-up task on the way out, assuming he caught everything he needed
+    to.
+  visual_proof: Medium shot, a coworker passing a task off casually, Hayato
+    receiving it a half-beat late.
+  information_delta: Reader sees the meeting end on an assumption Hayato has
+    not actually earned.
+  beat_role: mask_request
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_011
+  page_id: ep_001_p02
+  story_function: private_mask_confirmed
+  story_move: Hayato answers with the office mask — competent, unbothered —
+    while his actual state stays entirely private.
+  visual_proof: Close on Hayato's face, a small composed nod, nothing in his
+    expression admitting the overload from two panels ago.
+  information_delta: Reader confirms the public/private register gap the
+    ja_JP market guardrail specifies — outward composure over private
+    static.
+  beat_role: mask_confirmed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_012
+  page_id: ep_001_p02
+  story_function: threshold_departure
+  story_move: Hayato peels off from the group toward a stairwell door marked
+    for the rooftop, waiting until he's out of sight to let his shoulders
+    actually drop.
+  visual_proof: Wide hallway shot, Hayato breaking from the group toward a
+    door, one visible exhale once his back is to the camera.
+  information_delta: Reader sees the mask drop the instant it's no longer
+    required, not before.
+  beat_role: threshold_departure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_013
+  page_id: ep_001_p02
+  story_function: rooftop_space_reveal
+  story_move: Wide reveal of the rooftop break area — vending machines
+    against the rail, a faded half-court line painted into the concrete, an
+    old backboard bolted above a storage shed, all of it ordinary company
+    infrastructure nobody uses for its second purpose.
+  visual_proof: Wide establishing shot, vending machines, a worn painted
+    half-court line, a rusted backboard and rim, empty at this hour, city
+    skyline behind the rail.
+  information_delta: Reader gets the episode's central object (the
+    improvised hoop) established as mundane company scenery before it
+    becomes meaningful.
+  beat_role: space_reveal
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_014
+  page_id: ep_001_p02
+  story_function: body_cost_private_beat
+  story_move: Hayato drops his bag, loosens his tie, and presses both palms
+    flat on the rail for a moment, head down — the first fully private beat
+    of the episode.
+  visual_proof: Medium shot from behind, hands braced on the rail, tie
+    hanging loose, bag at his feet.
+  information_delta: Reader sees the physical cost of the morning made
+    visible in a single unwatched gesture.
+  beat_role: body_cost
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_015
+  page_id: ep_001_p03
+  story_function: flashback_transition
+  story_move: A hard visual cut with no caption — his dress shoes on
+    rooftop concrete becoming sneakers on a high-school gym floor
+    mid-squeak, the flashback beginning entirely through image.
+  visual_proof: Split-composition transition panel, dress shoes dissolving
+    into sneakers against two different floor textures.
+  information_delta: Reader is dropped into the flashback without
+    narration announcing it.
+  beat_role: flashback_transition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_016
+  page_id: ep_001_p03
+  story_function: flashback_wound
+  story_move: Flashback — teenage Hayato mid-possession, his eyes cutting
+    to the clock, the bench, the crowd, and a defender closing in, the same
+    fractured-attention geometry as the meeting room now rendered on a
+    court.
+  visual_proof: Wide court shot with the same four-way inset-glance device
+    from panel 8, now in a high-school gym.
+  information_delta: Reader connects the adult overload directly to its
+    origin without a single line of exposition.
+  beat_role: flashback_wound
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_017
+  page_id: ep_001_p03
+  story_function: flashback_wound
+  story_move: Flashback — the ball is stripped clean away, the buzzer
+    sounds, the opposing bench erupts, and his own teammates' faces freeze
+    mid-collapse. No dialogue.
+  visual_proof: Wide court shot, ball leaving Hayato's hands into a
+    defender's, buzzer light on the scoreboard, teammates' stricken faces
+    in the foreground.
+  information_delta: Reader receives the specific, visible wound the bible
+    requires — a critical turnover, not a vague implied failure.
+  beat_role: flashback_wound
+  action_intensity: 4
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_018
+  page_id: ep_001_p03
+  story_function: flashback_return_present
+  story_move: Cut back to the present — Hayato's hands empty at his sides
+    on the rooftop, the memory still visible behind his eyes for one more
+    beat before the world resumes.
+  visual_proof: Medium shot, present-day Hayato, empty hands, rooftop
+    background sharpening back into focus.
+  information_delta: Reader confirms the flashback has ended and lands its
+    emotional residue in the present body.
+  beat_role: flashback_return
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_019
+  page_id: ep_001_p03
+  story_function: object_arrival_body_before_mind
+  story_move: A worn, half-flat basketball — someone's forgotten lunchtime
+    ball — rolls out from behind the storage shed and stops against his
+    shoe.
+  visual_proof: Close insert, the ball rolling to a stop against a dress
+    shoe, scuffed leather, slightly underinflated.
+  information_delta: Reader gets the episode's central object arriving by
+    ordinary accident, not by narrative convenience.
+  beat_role: object_arrival
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_020
+  page_id: ep_001_p03
+  story_function: object_arrival_body_before_mind
+  story_move: He picks it up before deciding to — his hands finding the
+    correct grip on their own, faster than any conscious choice.
+  visual_proof: Close insert on his hands settling into a shooting grip,
+    unconscious and immediate.
+  information_delta: Reader sees the body-before-mind thesis the craft
+    bible specifies for this sport, rendered in a single gesture.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_021
+  page_id: ep_001_p03
+  story_function: witness_entry_silent
+  story_move: Aya pushes through the same stairwell door, escaping the same
+    meeting, coffee in hand and phone buzzing ignored in her pocket — she
+    stops when she sees him and stays quiet by the door.
+  visual_proof: Wide shot, Aya framed in the doorway, coffee cup and
+    notebook in hand, stillness in her own posture as she takes in the
+    scene before announcing herself.
+  information_delta: Reader meets Aya as a witness before she is
+    introduced as a character with dialogue.
+  beat_role: witness_entry
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_022
+  page_id: ep_001_p03
+  story_function: stillness_seed_held_beat
+  story_move: A held, silent beat — Hayato facing the old hoop, ball in
+    hand — for one breath the meeting, the phone, and the memory all recede
+    because his hands finally have exactly one thing to do.
+  visual_proof: Wide shot, Hayato squared to the hoop, everything else in
+    the frame rendered slightly soft, only the ball and the rim in hard
+    focus.
+  information_delta: Reader receives the episode's real thesis in image
+    form, without a single word of explanation — the series' "one ball"
+    device seeded silently, a full arc ahead of its name.
+  beat_role: stillness_seed
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_023
+  page_id: ep_001_p03
+  story_function: technique_execution
+  story_move: He shoots — no hesitation, no overthinking, an old form his
+    body never actually forgot even after years away from it.
+  visual_proof: Follow-shot on the release, clean elbow and wrist form,
+    speed lines minimal, the motion unhurried.
+  information_delta: Reader sees the raw talent the flashback implied, now
+    proven in the present rather than only remembered.
+  beat_role: technique_execution
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_024
+  page_id: ep_001_p03
+  story_function: technique_execution
+  story_move: The ball drops clean through the netless rim — a flat metal
+    sound instead of a swish, the rooftop's ordinary improvised hoop making
+    the moment feel small and real rather than triumphant.
+  visual_proof: Close insert, the ball passing through the bare rim, no
+    net, the rim's ring still faintly vibrating.
+  information_delta: Reader gets the shot's outcome confirmed without
+    spectacle — this is not staged as a victory beat.
+  beat_role: technique_execution
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_025
+  page_id: ep_001_p04
+  story_function: recognition_and_reveal
+  story_move: Aya steps out from the doorway, genuinely caught off guard by
+    the clean form, and says so before she's thought about whether to.
+  visual_proof: Medium two-shot, Aya stepping into the light, her surprise
+    visible and unperformed.
+  information_delta: Reader sees the witness turn into a participant, the
+    episode's actual pivot.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_026
+  page_id: ep_001_p04
+  story_function: mask_confirmed_recovery
+  story_move: Startled, Hayato retrieves the ball quickly and mutters
+    something dismissive, the office mask snapping back into place almost
+    as fast as it dropped.
+  visual_proof: Close on Hayato's face mid-recovery, the composed office
+    expression reasserting itself over the caught-out one.
+  information_delta: Reader sees how quickly the private moment gets
+    re-hidden once it's been seen.
+  beat_role: mask_confirmed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_027
+  page_id: ep_001_p04
+  story_function: invitation_offered
+  story_move: Aya, low-pressure and specific, names her team, the practice
+    schedule, and the roster shortage — an invitation with no urgency
+    attached to it.
+  visual_proof: Medium two-shot, Aya relaxed, gesturing loosely toward the
+    hoop rather than at him directly.
+  information_delta: Reader gets the concrete recruitment offer the episode
+    is built to deliver, stated plainly rather than as a speech.
+  beat_role: invitation_offered
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_028
+  page_id: ep_001_p04
+  story_function: threshold_hesitation
+  story_move: Hayato hesitates — the flashback's weight visible for a
+    half-second against the ball still warm in his hands — and does not
+    answer yes.
+  visual_proof: Close on Hayato's face, a flicker of the buzzer-light
+    memory faintly overlaid, his grip on the ball tightening slightly.
+  information_delta: Reader sees the unresolved conflict the bible
+    requires — no answer given, the invitation left open.
+  beat_role: threshold_hesitation
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_029
+  page_id: ep_001_p04
+  story_function: invitation_offered
+  story_move: Reading the hesitation correctly, Aya doesn't push — she
+    gives him the one practical detail he'd need if he came, then turns to
+    go, leaving the door open rather than demanding an answer.
+  visual_proof: Medium shot, Aya already half-turned to leave, tossing the
+    detail over her shoulder rather than waiting for a response.
+  information_delta: Reader sees the invitation deliberately left
+    unresolved by Aya herself, matching the bible's instruction that the
+    episode end on invitation, not acceptance.
+  beat_role: invitation_offered
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_030
+  page_id: ep_001_p04
+  story_function: closing_unresolved
+  story_move: Final wide — Hayato alone again on the rooftop at dusk, the
+    ball still in his hands, looking at the old hoop rather than at the
+    door Aya just left through. No decision has been made either way.
+  visual_proof: Wide closing shot, dusk light, Hayato motionless, ball held
+    loosely, the hoop and the empty half-court line in frame with him.
+  information_delta: Reader closes the episode inside the unresolved
+    invitation itself, matching ep_002's confirmed opening (sneakers
+    actually laced up) without this episode claiming that outcome for
+    itself.
+  beat_role: closing_held
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_001.yaml
+notes: 'Episode 1 of 12, arc 1 ("recruit" phase). Per the assignment matrix''s
+  beat purpose for ep_001: establishes Hayato''s flaw via a brief, wordless
+  visual flashback fragment to the high-school turnover (panels 15-17), has
+  Aya witness his one instinctive rooftop shot (panels 19-24), and ends on
+  her invitation to "just come look" at practice — not on acceptance (panels
+  27-30). Per the sports_competition craft bible and the anti-pattern rules
+  in config/source_of_truth/manga_story_strategies/sports_competition_strategies.yaml,
+  no character narrates or explains the psychology at any point; the flaw and
+  its cost are carried entirely by objects (the meeting notebook, the desk
+  drawer with the old sneakers, the netless rooftop rim) and by the eyes-dart
+  device that recurs unmodified from the flashback into the present. The
+  desk-drawer sneakers (panel 4) are a deliberate continuity plant for
+  ep_002''s already-authored cold open (its sneakers are "actually on his
+  feet" — meaning this episode must NOT show him accepting or lacing them).
+  NOTE: scripts/ci/check_manga_arc_storyboard.py does not exist in this repo
+  checkout and could not be run against this file; it was authored to this
+  established shape anyway for continuity with the storyboard-first sequence
+  (see stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml
+  and this series'' own ep_002.arc_storyboard.yaml, which already exists on
+  disk and was read in full before writing this file for cast/continuity
+  precedent — the Japanese series title 「静寂のフリースロー」 used here is
+  carried over verbatim from that file, not invented independently).'

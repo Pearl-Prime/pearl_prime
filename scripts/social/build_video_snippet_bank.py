@@ -407,17 +407,48 @@ def apply_stub_guard(bytes_: int, decode_ok: bool, duration_ok: bool) -> str:
     return "ok"
 
 
-def build_snippet_bed(out_path: Path, duration_s: float, mood_register: str) -> Path:
-    """Pure-sine ambient bed (3 detuned tones, lowpass, fade). Same technique as
-    render_broll_montage_shorts.build_bed's pad layer — no anoisesrc, so this is
-    fully deterministic (spec §3.3)."""
+def build_snippet_bed(
+    out_path: Path,
+    duration_s: float,
+    mood_register: str,
+    *,
+    licensed_audio: Path | None = None,
+) -> Path:
+    """Build an audio bed for the snippet.
+
+    Prefer a licensed Storyblocks track when ``licensed_audio`` is provided and
+    exists; otherwise fall back to the deterministic synthetic sine bed
+    (spec §3.3). The sine fallback MUST remain — keys may be absent and other
+    lanes still depend on rendering without Storyblocks credentials.
+    """
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    fade_out_start = max(duration_s - 1.0, 0.0)
+    fade_out_dur = min(1.0, duration_s * 0.3)
+
+    if licensed_audio is not None and Path(licensed_audio).is_file():
+        # Use -af (not filter_complex) for single-input audio filters.
+        af = (
+            f"atrim=0:{duration_s:.3f},asetpts=PTS-STARTPTS,"
+            "volume=0.12,"
+            f"afade=t=in:st=0:d=0.3,afade=t=out:st={fade_out_start:.2f}:d={fade_out_dur:.2f}"
+        )
+        run(
+            [
+                FFMPEG,
+                "-y",
+                "-i",
+                str(licensed_audio),
+                "-af",
+                af,
+                str(out_path),
+            ]
+        )
+        return out_path
+
     freqs = MOOD_FREQS[mood_register]
     inputs: list[str] = []
     for f in freqs:
         inputs += ["-f", "lavfi", "-i", f"sine=frequency={f}:duration={duration_s}"]
-    fade_out_start = max(duration_s - 1.0, 0.0)
-    fade_out_dur = min(1.0, duration_s * 0.3)
     filt = (
         "[0][1][2]amix=inputs=3:weights=1 1 1,"
         "lowpass=f=1200,volume=0.08,"
@@ -587,8 +618,29 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     }
 
 
-def mux_with_bed(silent_video: Path, mood_register: str, duration_s: float, work_dir: Path, out_path: Path) -> None:
-    bed = build_snippet_bed(work_dir / "bed.wav", duration_s, mood_register)
+def mux_with_bed(
+    silent_video: Path,
+    mood_register: str,
+    duration_s: float,
+    work_dir: Path,
+    out_path: Path,
+    *,
+    work_unit_id: str | None = None,
+) -> None:
+    """Mux silent video with licensed Storyblocks audio bed when available, else sine fallback."""
+    licensed: Path | None = None
+    try:
+        from scripts.storyblocks.mood_audio import resolve_licensed_audio_bed
+
+        licensed = resolve_licensed_audio_bed(mood_register, work_unit_id)
+    except Exception:
+        licensed = None
+    bed = build_snippet_bed(
+        work_dir / "bed.wav",
+        duration_s,
+        mood_register,
+        licensed_audio=licensed,
+    )
     kinetic_mod.mux(silent_video, bed, out_path)
 
 
@@ -675,7 +727,14 @@ def render_cell(cell: Cell) -> Receipt:
     else:
         raise SystemExit(f"unknown family {cell.family!r}")
 
-    mux_with_bed(info["silent_video"], mood_register, duration_s, work_dir, final_path)
+    mux_with_bed(
+        info["silent_video"],
+        mood_register,
+        duration_s,
+        work_dir,
+        final_path,
+        work_unit_id=f"social_broll:{cell.topic}",
+    )
 
     summary = ffprobe_summary(final_path)
     decode_ok = summary["video_codec"] is not None

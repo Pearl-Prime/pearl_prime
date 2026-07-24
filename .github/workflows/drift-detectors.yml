@@ -56,7 +56,9 @@ jobs:
         run: PYTHONPATH=. python3 scripts/ci/check_catalog_manifest_acceptance_layer.py
 
       - name: Catalog ship G-WRAP + G-DEF4 detectors (BLOCK integrity)
-        run: PYTHONPATH=. python3 scripts/ci/check_catalog_ship_wrap_defect4.py
+        run: |
+          python3 -m pip install --quiet pyyaml
+          PYTHONPATH=. python3 scripts/ci/check_catalog_ship_wrap_defect4.py
 
       - name: Templated cluster G-F1H detector (BLOCK integrity)
         run: PYTHONPATH=. python3 scripts/ci/check_f1h_templated_cluster_hard.py
@@ -205,7 +207,7 @@ jobs:
 
       - name: Metricool managed durability (pin + brand map + registry — BLOCK)
         run: |
-          python3 -m pip install --quiet pyyaml
+          python3 -m pip install --quiet pyyaml requests Pillow
           PYTHONPATH=scripts/ci:scripts/integrations/metricool:. python3 scripts/ci/check_metricool_managed.py
 
       - name: Composite doctrine secular + shape (WISDOM_ESSENCE ruling — BLOCK on diff)
@@ -217,6 +219,15 @@ jobs:
             EXTRA=(--base "$BASE" --head HEAD)
           fi
           PYTHONPATH=scripts/ci:. python3 scripts/quality/check_composite_doctrine_secular.py "${EXTRA[@]}"
+
+      - name: zh-TW Simplified contamination (simplified-as-traditional — BLOCK on new debt)
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_zh_tw_simplified_contamination.py "${EXTRA[@]}"
 
       - name: No-lost-functions — capability regression vs base (§18 — BLOCK)
         env:

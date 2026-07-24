@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-15 @ `origin/main` `8a0b09f9b02efb3c5fa78002cfe7dd71e105fd35` (old-chat unblock state/router update #5661)
+**LAST VERIFIED:** 2026-07-22 @ `origin/main` `a08b8af17b4e7b37ac36be7d4c1c8f6049e5ee37` (Pearl Prime pipeline audit 2026-07-22; prior 07-15 tip `8a0b09f9b0…` superseded for Flagship / Books-first / Open-PR / atom-coverage rows below)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -17,11 +17,15 @@
 
 ### Flagship book (gen_z_professionals × anxiety) — PROVEN-AT-BAR
 **OPD-20260707-FLAGSHIP-L4** — operator Layer-4 blind-read **APPROVED** the full 12-chapter book
-(build 9, `extended_book_2h`, seed `flagship_phase2_layer6`, 21,012w). First PROVEN-AT-BAR book in
-program history. Both goldens now live + byte-frozen:
-- **Golden #1 (ch1):** `artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt` — CI-enforced.
-- **Golden #2 (full book):** `artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt` (sha `fd0c49ec26…`) —
-  ratified this cycle; `check_flagship_book_parity.py --snapshot full` flipped DORMANT→live/required.
+(build 9, `extended_book_2h`, seed `flagship_phase2_layer6`). First PROVEN-AT-BAR book in
+program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 audit):
+- **Golden #1 (ch1):** `artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt` — CI-enforced; SHA matches metadata.
+- **Golden #2 (full book):** `artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt` —
+  `content_sha256=e015ddc30b86…`, **21,729w / 122,512 bytes**, metadata `status: ratified`.
+  Self-parity via `check_flagship_book_parity.py --snapshot full --full-from-file <golden>` → BYTE-IDENTICAL.
+  Live `register_gate` re-score on the golden currently FAILs F6/F7 (F14 share 8.98% under ceiling) —
+  Layer-4 human verdict still stands; see `artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md` Q-AUDIT-REG-01.
+  `check_flagship_book_parity.py --snapshot full` flipped DORMANT→live/required.
 - **Required gates (approved):** exercise five-layer integrity + pick diversity + F7 precision fix —
   wired into Drift detectors + readiness gates 30/31. Ch1 parity stays byte-identical.
 - **Door-back (rider):** this cell is `extended_book_2h` by deliberate decision (Option A
@@ -168,6 +172,39 @@ program history. Both goldens now live + byte-frozen:
 - **Next manga blocker (post-wave):** stillness post-merge proof re-run (local-only artifacts must not be reported as
   landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — v3 pilot is the current honest layered proof surface.
 
+### Manga 48ep/3catalog dispatch (ja_JP/zh_TW/en_US genre-native self-help series)
+- **Authority:** `docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/00_MASTER_DISPATCH_PROMPT.md`
+  (+ `ASSIGNMENT_MATRIX.tsv`, 111 brand×catalog cells). Parent project
+  `proj_manga_catalog_reconciliation_20260426`.
+- **Signal: `manga48-pilot-ja_JP-pass=97e61a849bb38266ace21d7b209d2af8fc3c19d9`** — ja_JP
+  pilot cell **MERGED 2026-07-23** (PR #196, squash SHA `97e61a849bb38266ace21d7b209d2af8fc3c19d9`):
+  `focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball`, arc 1
+  (ep_001-012, the "recruit" phase; sports_competition genre, adhd_focus topic).
+  All 12 episodes pass `check_manga_story_authored.py` +
+  `validate_story_excellence.py --production --json` (score 100/85).
+  **Operator voice/quality read-approval received 2026-07-23** (Router SS16) — this
+  cell is now the frozen ja_JP quality bar for the rest of this wave. Per the
+  dispatch's Ramp, this clears the ja_JP leg of the 3-cell pilot (`en_US /
+  stillness_press` was already complete before this program started; `zh_TW` is
+  still blocked on lane 01's research gap, see below). acceptance_layer:
+  authored_candidate only — gate-PASS is not a bestseller/PROVEN-AT-BAR claim.
+- **Known gaps carried forward (do not re-derive, see PR #196 body for detail):**
+  `scripts/ci/check_manga_arc_storyboard.py` and
+  `schemas/manga/arc_storyboard_plan.schema.json`, referenced repeatedly by the
+  dispatch pack, do not exist in this repo checkout — that gate could not be run
+  for this cell (or presumably any other). A `relevance_genre` data-quality bug
+  (genre-family engine id used where the excellence gate requires the resolved
+  canonical id, e.g. `sports_competition` → `sports`) was discovered and
+  corrected in this cell's `story_architecture_handoff.json`; check for the same
+  class of bug on every new genre's first cell.
+- **Still blocked:** `zh_TW` pilot cell — do not author until
+  `01_RESEARCH_GAP_ZHTW_MODERN_READER_PROMPT.md`'s lane lands (or an explicit
+  operator override is logged as an OPD), per the master dispatch's "Do not" list.
+- **Next:** scale wave for `ja_JP` (remaining ~35 cells, flagship tier first)
+  can now proceed against the frozen ja_JP voice bar; do not go deep on arc 2
+  for any series before every brand has an authored arc 1 in every catalog,
+  per the dispatch's ordering rule.
+
 ### DevOps / repo hygiene
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`; July 15 old-chat unblock wave reduced stale PR requeue risk**
 - **Details:**
@@ -192,24 +229,24 @@ program history. Both goldens now live + byte-frozen:
 - **Verdict:** Pearl Prime books **NOT catalog-scale production-ready** (89 tracked Waystream EPUB artifacts + 1 flagship PROVEN-AT-BAR ≠ ~1,519 listings; the 2026-07-14 pack shipped/attached a two-EPUB micro-wave only)
 - **Landed (do not re-queue):** **#5490** spine-default lock (`2236c03a23`, 2026-07-10); **#5501** ja-JP teacher-bank (`45e511ab96`, 2026-07-10); **#5525** book-path workstream closeout (`1f4c3155d8`, 2026-07-10); **#5527** books-first SSOT refresh (`b58cdba62e`, 2026-07-10); **#5489** thin-persona canonical atom repair; **#5530** educators×imposter_syndrome REFLECTION parse-gap + binding contradiction repair (`2d9ada1e21`, 2026-07-11 — one cell only, see thin-persona caveat above; do not re-queue this exact cell); **#5532** PROGRAM_STATE thin-persona reflection (`e11f44b5ab`, 2026-07-11); **#5627/#5630/#5632/#5637/#5640/#5641** books-first EPUB wave foundation → slate → no-op seed → tuple proof → two-EPUB ship → GHL/R2 attach. Adjacency/transition/overlay already on `main`: #5156 / #5162 / #5298 / #5515 / #5516 / #5519.
 - **Next books-first actions (live order):**
-  1. **Next proof-approved EPUB micro-wave:** either fix the failed `educators × imposter_syndrome × false_alarm` production gates or choose the next tuple-proof-approved cells; keep smoke→pilot→scale caps and do not promote anything until a real EPUB exists.
-  2. **GHL attach each newly shipped real EPUB** using the existing `brand_deliveries/way_stream_sanctuary.json` + R2 proof convention; no paid promotion without asset-exists proof.
-  3. **True governance-only `NO_BINDING` cells** still require a binding call; do not conflate them with already-legal/repaired `false_alarm` cells.
-  4. **#5237** atom-cohesion craft lane — **OPEN/RED/DIRTY/CONFLICTING**; this pack marked it BLOCKED and held a remote evidence branch. Repair requires a split/rebase follow-up, not a narrow check fix.
-  5. **#5206** bestseller-conformance audit/evidence — **OPEN/DIRTY/stale/hot-file-polluted**; this pack marked it BLOCKED. Treat as historical evidence unless PM serializes a replacement audit without `CANONICAL_ARTIFACTS_REGISTRY.tsv`.
-- **Held / not now:** **#5295** (owner), **#3166** (operator budget), **#4861** (governance audit evidence)
-- **Not books prerequisite / not live authority:** manga PROVEN-AT-BAR; **#5526** manga-only (already merged tip docs); **#5518** agent-execution-fabric docs — **OPEN/RED** and **absent from `origin/main`** (do not cite as live authority); **#5502** dashscope audit; ~150 catalog-skeleton listing PRs
+  1. **story_atoms for EPUB workhorse cells** (esp. `corporate_managers` × top topics/engines) so research_fit can bind — 2026-07-22 audit: register-PASS books still ship unbound (`structurally_clear_only`). Authority: `artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md`.
+  2. **Next proof-approved EPUB micro-wave:** either fix the failed `educators × imposter_syndrome × false_alarm` production gates or choose the next tuple-proof-approved cells; keep smoke→pilot→scale caps and do not promote anything until a real EPUB exists.
+  3. **GHL attach each newly shipped real EPUB** using the existing `brand_deliveries/way_stream_sanctuary.json` + R2 proof convention; no paid promotion without asset-exists proof.
+  4. **True governance-only `NO_BINDING` cells** still require a binding call; do not conflate them with already-legal/repaired `false_alarm` cells.
+  5. **Atom-cohesion craft (ex-#5237):** PR number **no longer resolves** on this repo. Q1 thesis topic-overlay **partially landed** (8 topics in `chapter_thesis_bank.yaml`); Q2 adjacency/dwell craft gate **still open**. Do not cite `#5237`/`#5206` as live.
+- **Landed 2026-07-21 (do not re-queue):** **#9** `feat(bestseller-atom-flow): research_fit honesty gate + acceptance-layer stamp + cell-aware driver + courage atoms` (`280597dacf`) — advisory CI gates 34/35 + Drift detectors wiring; courage story_atoms for millennial_women_professionals×false_alarm only.
+- **Held / not now:** owner-gated hygiene / lean-CI drafts — re-derive via `gh pr list` (old #5295/#3166/#4861 numbers may be stale on this repo).
+- **Not books prerequisite / not live authority:** manga PROVEN-AT-BAR; agent-execution-fabric docs until merged on `origin/main`.
 
-### Open PR truth (owner/operator-gated — not merged)
-| PR | State | Gate |
+### Open PR truth (re-derived 2026-07-22 — old #5237/#5206 DO NOT RESOLVE)
+| PR / item | State | Gate |
 |----|-------|------|
-| **#5237** | **OPEN**, CI **red** | Atom cohesion craft — repair-needed follow-on; **not green**; re-scope vs landed #5156/#5162/#5298/#5515–#5519 before rework |
-| **#5206** | **OPEN**, dirty/stale | Bestseller conformance audit/evidence — evidence-only; hot-file-polluted; replacement audit must be PM-serialized |
-| **#5518** | **OPEN**, CI **red** | Agent execution fabric v1 docs — **not on `origin/main`**; **not live authority** until merged |
-| **#5295** | **OPEN**, checks green | Owner-gated full-repo redundancy/garbage sweep + Q-gated roadmap — **do not merge in this lane** |
-| **#3166** | **OPEN**, **draft** | `ci(budget): lean content-PR gating` — **DO NOT MERGE until Jul 1 reset** (operator-gated) |
+| **ex-#5237 atom-cohesion** | **STALE NUMBER** | Search by title/branch; Q1 partial / Q2 open per audit — do not cite #5237 |
+| **ex-#5206 bestseller-conformance** | **STALE NUMBER** | Superseded by `artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md` |
+| **#56** | **OPEN** | Piper *prompt* for this audit only — not the audit report itself |
+| **#9** | **MERGED** 2026-07-21 | bestseller-atom-flow honesty gates + courage atoms |
 
-**Merged (removed from open table):** #5490, #5501, #5525 (book-path lockdown + closeout); #5527 (books-first SSOT); #5489/#5530 (thin-persona atom + residual buildability); #5532 (PROGRAM_STATE thin-persona reflection).
+**Merged (removed from open table):** #5490, #5501, #5525 (book-path lockdown + closeout); #5527 (books-first SSOT); #5489/#5530 (thin-persona atom + residual buildability); #5532 (PROGRAM_STATE thin-persona reflection); #9 (bestseller-atom-flow 2026-07-21).
 
 ### Storefront
 - **Status:** **LIVE (listings)** — **consumer paid-download scale still blocked** on asset depth
@@ -220,6 +257,41 @@ program history. Both goldens now live + byte-frozen:
   Phase A go-live.
 
 ---
+
+### Social Media Atom Bank
+- **Status:** **ACTIVE project since 2026-07-21 — previously had NO row in this SSOT at all**, despite
+  being an active project; that omission is itself one of the gaps closed by
+  `docs/specs/SOCIAL_MEDIA_100PCT_PRODUCTION_PLAN_2026-07-22.md` (full layer-honest plan + Q-gates there).
+  **No component of this subsystem has reached PROVEN-AT-BAR.**
+- **Details:**
+  - **Atom bank:** `SOURCE_OF_TRUTH/social_media_atoms/` — ~1,952 total rows: 1,642 EN evergreen
+    (`evergreen_en_us_atoms.jsonl`), 250 platform/surface (`platform_surface_atoms.jsonl`), 60 APAC
+    localization (`apac_localization_atoms.jsonl`: ja-JP/zh-TW/ko-KR/zh-CN/zh-HK/en-SG). Registry row
+    `evergreen_social_atom_bank` is durable in `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv`.
+    **EXECUTED-REAL**, not PROVEN-AT-BAR: 98.7% of rows
+    share undifferentiated boilerplate `SRC_*` citations (only 1.3% are falsifiable quote+path citations,
+    per `artifacts/qa/social_research_currency_audit_20260722/RESEARCH_CURRENCY_AUDIT.md`).
+  - **Brand/author vibe schema** (`SOCIAL-ATOM-BANK-VIBE-01`, `docs/PEARL_ARCHITECT_STATE.md`) is durable
+    on `origin/main`: the voice-profile catalog and deterministic assembler wiring both exist.
+    **Anti-spam variation gate** (`scripts/ci/check_social_post_variation.py`) was wired into production
+    readiness by PR #123; its corrected unique display number is gate 45 (formerly cited as gate 36).
+    PR #75 is merged, and `social_media` is registered in `SUBSYSTEM_AUTHORITY_MAP.tsv`.
+  - **Visual-license operator gate:** `artifacts/qa/deterministic_social_visual_gate_20260718/` — 3 source
+    visuals license-verified, but **0 of 405 render rows production-ready**, `LIVE_PUBLISHING_AUTHORIZED=no`
+    pending operator look-packet approval (`artifacts/operator_read_packets/deterministic_social_visual_gate_20260718/operator_look_packet.md`).
+    Single largest concrete blocker between "atoms exist" and "a real post could ship with real visuals."
+  - **Storyblocks visual b-roll bank:** 16 licensed assets across 8 of a planned 12 topics
+    (`social_media_bank_storyblocks_20260720`); full 12-topic fill explicitly not yet claimed done.
+  - **Weekly research-refresh cadence:** ran once (2026-07-18, digest + delta-atom promotion, both
+    completed same-day) — **zero recurring mechanism** (no cron/workflow/scheduled-task) found anywhere
+    in the repo; "weekly" is not yet mechanically enforced.
+  - **APAC review-gate compliance:** 60/60 rows at `review_status=reviewed_candidate` (correctly not
+    `draft`, but also not `production_ready`) — review evidence is one operator chat-level assertion
+    (`OPD-OC7-02`), not a durable per-row native-reviewer sign-off artifact.
+  - **Live scheduling:** correctly `NOT_AUTHORIZED` — a ratified spec non-goal (§Non-Goals), not a defect.
+  - **Full plan, sequenced gap list, and Q-SOCIAL-* open questions:**
+    `docs/specs/SOCIAL_MEDIA_100PCT_PRODUCTION_PLAN_2026-07-22.md`.
+
 
 ## Jul 1 Execution Runbook (plan-of-record)
 
@@ -250,88 +322,57 @@ sweep found the chapter-thesis bank is keyed `intent → engine` only, so the sa
 reused across **128 (persona×topic) cells** — the top remaining quality lever. These fire **after** the flip
 ships the first EPUB batch; they are not Jul 1 critical-path steps.
 
-| Row | Chunk | Fire when | Owner | Prompt |
-|-----|-------|-----------|-------|--------|
-| **Q1** | Thesis de-templating (engine-keyed → topic-keyed) + fill spiral/overwhelm/comparison + pool depth | First R2 EPUB batch shipped (freeze lifted) | Pearl_Editor + Pearl_Writer | `docs/sessions/cohesion_chunk_prompts_20260630/cohesion_chunk_1_thesis_de_templating.md` |
-| **Q2** | Adjacency-aware selector + dwell/integration-pacing craft gate | (a) first EPUB batch shipped **AND** (b) OPD-20260629-002 (#3110/#3123) landed — sequenced **after** Q1 | Pearl_Dev | `docs/sessions/cohesion_chunk_prompts_20260630/cohesion_chunk_2_adjacency_selector.md` |
+| Row | Chunk | Fire when | Owner | Prompt | Status 2026-07-22 |
+|-----|-------|-----------|-------|--------|-------------------|
+| **Q1** | Thesis de-templating (engine-keyed → topic-keyed) + fill spiral/overwhelm/comparison + pool depth | First R2 EPUB batch shipped (freeze lifted) | Pearl_Editor + Pearl_Writer | `docs/sessions/cohesion_chunk_prompts_20260630/cohesion_chunk_1_thesis_de_templating.md` | **PARTIAL** — freeze lifted; 7 engine baselines + `topics:` overlay for 8 topics; cross-cell identical chapter opens still observed in audit samples |
+| **Q2** | Adjacency-aware selector + dwell/integration-pacing craft gate | (a) first EPUB batch shipped **AND** (b) OPD-20260629-002 (#3110/#3123) landed — sequenced **after** Q1 | Pearl_Dev | `docs/sessions/cohesion_chunk_prompts_20260630/cohesion_chunk_2_adjacency_selector.md` | **OPEN** — F13 dwell detector exists but WARN-only; no adjacency HARD gate |
 
 Q2 is gated behind Q1 (adjacency penalty needs the varied thesis pools) and behind the composer lane landing
 (both touch `enrichment_select.py` / `register_gate.py` — serialize, never parallel-edit).
 
+### Atom coverage (en_US) — measured 2026-07-22
+- `scripts/inventory/atom_coverage_audit.py`: **100%** CANONICAL presence on 13 personas × **15 core production topics**; **29.8%** on the script's full 57-topic list (221/741).
+- `story_atoms/…/anchored/`: **6 personas / 9 persona×topic cells** (courage only for millennial_women_professionals×false_alarm). Authority: `artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md`.
+
+### Catalog plan + assembly readiness audit (2026-07-23)
+Six-lane audit (A-F, `artifacts/qa/pearl_prime_catalog_assembly_audit_20260723/`) answering the operator's
+questions on US catalog planning, Pearl_Editor sequencing, plan/assembly readiness at scale, revenue/access mix,
+and EI v2 wiring. **All five sub-lanes + this synthesis are read-only; zero atoms/config/pipeline code changed.**
+
+- **Volume correction (supersedes the "en_US Listings" section above — that section's numbers are stale by
+  ~15x; do not edit that section's rows, this entry is the current truth pending a dedicated reconciliation
+  PR):** live en_US catalog is **32,401 book-plan files across 40 brand archetypes** (not 1,519 listings /
+  26 brands / 2,187 files). **37 of 40 brands genuinely carry ~800-845 books each** — the per-brand-800 framing
+  is now closer to true than the ratified `CATALOG-800-PER-BRAND-01` cap (2026-05-06) states; see
+  Q-CATALOG-AUDIT-04. 3 brands (`qi_foundation`/`body_memory`/`still_forest`) have a broken series-plan-import
+  (~92% arc-orphaned) — a pipeline-completion bug, not a smaller deliberate target.
+- **Assembly-readiness ceiling, full 657-cell / 32,401-book census (not a sample):** only **1.4%** (465 books)
+  predicts to `authored candidate`-eligible (Layer 2 precondition: research_fit BOUND + tuple-viability PASS);
+  **70.6%** (22,885) is capped at `structurally clear only` (Layer 1, no character bank); **27.9%** (9,027)
+  predicts to fail the render preflight outright (`path broken`, not merely unbound). BOUND is a precondition,
+  not a guarantee — one BOUND cell (`healthcare_rns × burnout × overwhelm`) was live-rescored by the 07-22
+  audit and still failed `chapter_flow`/`book_quality_gate`.
+- **Root cause (cross-lane):** catalog admission and per-slot atom selection gate on **build-order/backfill
+  timing only** — never on content-authority (story_atoms coverage), craft/EI-v2 signal, or revenue potential.
+  Pearl_Editor content-authority enters only at render time as a soft-skip lookup (no catalog-admission check);
+  the resulting 98.5%-uncapped catalog and the observed persona/revenue-mix skew (first_responders at ~5% of
+  core-persona density despite being marketing-plan-ranked opportunity #4) are two faces of the same absence,
+  not independent defects.
+- **EI v2:** has one live production hard-gate (`enforce_bestseller_beat_order`, plan-time) and one fully-built
+  but disarmed hard-gate (`enforce_dimension_gates`, render-time, flag never flipped `True`). The function
+  purpose-built to feed EI v2 signal into plan-time atom selection (`hybrid_select_slot_production()`) has zero
+  production callers — dead code by call-graph. A real architecture spec for wiring this
+  (`docs/specs/EI_V2_STRENGTHENED_ARCHITECTURE_SPEC.md`) has sat unratified for 6 weeks.
+- **Four cap-entry candidates surfaced for Pearl_Architect ratification** (not self-ratified):
+  `Q-CATALOG-AUDIT-01` (plan-time content-authority flag), `Q-CATALOG-AUDIT-02` (revenue-signal wiring +
+  access-floor quota), `Q-CATALOG-AUDIT-03` (ratify/reject EI v2 strengthened-architecture spec direction),
+  `Q-CATALOG-AUDIT-04` (re-ratify `CATALOG-800-PER-BRAND-01` against current reality).
+- **Full report:** `artifacts/qa/pearl_prime_catalog_assembly_audit_20260723/lane_f_synthesis/REPORT.md` (answers
+  every operator question directly, cites all five lane reports + evidence). Standalone operator handoff:
+  `artifacts/coordination/handoffs/pp-catalog-audit-lane_f_2026-07-23.md`.
+- **Not covered by this pack:** locales beyond en_US; any live render/parity verification (everything above is
+  static-analysis prediction except the 07-22 audit's 3 cited live samples); manga/audiobook/music catalog axes.
+
 ---
 *Supersedes all previous status reports and planning baselines (incl. the May 2026 worldwide plan). Latest session
 detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md`.*
-
----
-
-## 2026-07-19 Brand wizard onboarding — verification + 3 fixes — offline
-
-**NOT a main merge.** GitHub remains 403-blocked (re-confirmed live at synthesis:
-`git fetch origin` / `gh api user` both 403 account-suspended). All fixes below are
-**LANDED-OFFLINE** on `pearlstar_offline/brand-wizard-verify-20260719`, not on
-`origin/main`. Full synthesis: `artifacts/qa/brand_wizard_verification_synthesis_2026-07-19.md`.
-
-| Behavior | Layer | Note |
-|---|---|---|
-| Wizard → YAML → brand assignment | EXECUTED-REAL | already correct, no fix needed |
-| Market capture — en_US / ja_JP / zh_TW | EXECUTED-REAL PASS | already correct |
-| Market capture — zh_CN / zh_SG | **FIXED** (was FAIL, collapsed to en_US) | `BrandWizard-zh.jsx` `resolveOnboardingMarket()` added; `d796e3fac58e962fb2b0a039922201cbac1cdcda` |
-| Teacher one-per-market exclusivity | EXECUTED-REAL (sim) | second claim → HTTP 409 `teacher_claimed` |
-| Doctrine fallback — onboarding route (409 → generalized) | **ABSENT** | follow-on: wire 409 response to offer generalized-doctrine brand |
-| Doctrine fallback — pipeline mechanism | **FIXED** + mini EXECUTED-REAL proof (name A=2, B=0, doctrine markers both) | `--teacher-attribution named\|generalized`; `9f8a857e6dcdc5fb15e98eab8df4856cf6a5d391` |
-| Full 2-book spine-chord production A/B proof | **BLOCKED** | G-DEF4 persona/topic + thin atom coverage (12 of wanted 20/slot) for `master_feung` |
-| Director page brand-scoped routing | EXECUTED-REAL | zero-asset + asset-bearing brand both proven |
-| Phantom (planned, not-created) books shown as available | **FIXED** | `_is_catalog_bearing` fail-closed + ops deep-link retargeted off `brand_admin.html`; `9756ebbc8890f7e9fb656ee54d1fee7238d5c454` |
-
-**Operator-belief corrections (false premises, corrected here + at
-`docs/agent_prompt_packs/20260719_brand_wizard_verify/INDEX.md`):**
-- **"No TW wizard"** — false; `wizard-tw.html` exists and works. Likely confused with the
-  adjacent, real bug in the *Simplified-Chinese* wizard (`wizard-zh.html`), which silently
-  dropped both zh_CN and zh_SG submissions to en_US before today's fix.
-- **"Market code is missing"** — false; the registry/lane-mapping mechanism already existed
-  for 3 of 4 wizards. The gap was narrower: one wizard file never called its own
-  market-resolution function. Now fixed.
-
-**Follow-ons named (not started):** (1) wire onboarding 409 `teacher_claimed` → generalized-doctrine
-offer; (2) full spine-chord A/B proof after persona/coverage alignment; (3) sibling-surface
-phantom-book audit (`brand_admin.html` direct, storefront, GHL feed, exec dashboard).
-
-Proof root: `artifacts/qa/brand_wizard_yaml_market_verify_20260719/`,
-`artifacts/qa/brand_wizard_teacher_doctrine_verify_20260719/`,
-`artifacts/qa/brand_wizard_director_page_verify_20260719/`. Replay runbook:
-`docs/runbooks/BRAND_WIZARD_GITHUB_RETURN_REPLAY_2026-07-19.md`. Wake replay on
-`github-suspension-lifted`.
-
----
-
-## 2026-07-18 Perfect Books Wave-2 offline wave (pending GitHub replay)
-
-**NOT a main merge.** GitHub remains 403-blocked. Wave-2 of the Pearl Prime
-Perfect Books program (bank fill + flagship line-edit + deferred CI gates +
-blind-10 prep) is **LANDED-OFFLINE** on `pearlstar_offline` — offline-substrate
-≠ on `origin/main`. Do **not** treat any lane SHA as DONE/merged. Spec:
-`artifacts/qa/pearl_prime_100book_analysis_20260718/PEARL_PRIME_PERFECT_BOOKS_SPEC.md`.
-
-| Lane | Ref | SHA |
-|------|-----|-----|
-| 00 Wave-1 preserved | `offline/pearl-prime-perfect-books-wave1-20260718` | `9056df3354df6a84755fb47a38da2793f141efa9` |
-| 01 substrate lock | `offline/perfect-books-wave2-substrate-20260718` | `5e648abae1f0841821186bb085a54c7882a21ae7` |
-| 02 bank fill (C1–C4) | `offline/perfect-books-wave2-bankfill-20260718` | `d48fbdacacabc21641709f9411af90dd46c3ed27` |
-| 03 flagship line-edit (L1–L4) | `offline/perfect-books-wave2-lineedit-20260718` | `4356fb0dea205510e7c82a5afad0a629c9117d25` |
-| 04 deferred CI gates | `offline/perfect-books-wave2-cigates-20260718` | `b2d6761d9d641e53af8f27b91974adaebddef24b` |
-| 05 blind-10 prep | `offline/perfect-books-wave2-blind10-prep-20260718` | `2a7332763db2105a7ff24e7c521699b2fa0dbdc0` |
-| 06 final audit | `offline/perfect-books-wave2-final-20260718` | see `FINAL_AUDIT.md` handoff |
-
-**Honest layer — do not round up:** `SYSTEM_WORKING_CELLS = 0` (Lane 03 read
-all 3 designated cells fresh; all 3 `ONTGP_VERDICT.md` are real, evidenced
-**FAIL** — `healthcare_rns × burnout × overwhelm` closest, one documented
-renderer fix away). SYSTEM stays **`authored candidate`** overall. **NO
-bestseller-register claim.** G-F1H/G-ORIENT/G-ACCENT CI gates shipped +
-mutation-verified (Lane 04). Bank fill landed for 3 burnout cells; the C4
-persona-registry routing defect is catalog-wide (14/16 topic registries
-single-persona-authored) and was root-caused, **not fixed**. Blind-10 packet
-(10 real Layer-1-ceiling `way_stream_sanctuary` EPUBs) is assembled and
-**unread** — Layer-4 PENDING operator read.
-
-Proof root: `artifacts/qa/perfect_books_wave2_20260718/`. Replay queue +
-residual blockers in `FINAL_AUDIT.md` §8/§7. Wake replay on `github-suspension-lifted`.
