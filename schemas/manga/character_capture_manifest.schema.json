@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://phoenix-omega.dev/schemas/manga/character_capture_manifest.schema.json",
+  "title": "Character video-capture manifest (manga pose-bank supply)",
+  "description": "One manifest per character × outfit. Compiles demanded pose_ids into short identity-anchored video clips for frame harvest into the image bank. Authority: docs/specs/MANGA_VIDEO_POSE_BANK_SUPPLY_SPEC.md. Consumed by Lane 04 scripts/manga/video_bank/ compiler + capture runner. Extracted still layers remain ordinary L2/L3 assembly_manifest assets; motion-source artifacts (clips, contact sheets) claim A0–A9 per MANGA_LAYER_RENDER_CONTRACT_SPEC §4.6 / §19.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "series_id",
+    "character_id",
+    "identity_version",
+    "outfit_id",
+    "anchor",
+    "capture_sets",
+    "quota_budget",
+    "provenance_default"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable id, typically <series>__<character>__<outfit>__capture_vN"
+    },
+    "series_id": { "type": "string", "minLength": 1 },
+    "character_id": { "type": "string", "minLength": 1 },
+    "identity_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identity lock revision (PuLID sheet hash / model_sheet version). All clips in this manifest share this version."
+    },
+    "outfit_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Outfit key; must match character_design / inventory outfit vocabulary."
+    },
+    "demand_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "enum": ["series_demand_rollup", "bank_contracts_fallback"],
+          "description": "rollup when manga-bank-demand-rollup-merged exists; else per-episode bank_contracts + series master plan golden."
+        },
+        "rollup_path": { "type": "string" },
+        "bank_contracts_glob": { "type": "string" },
+        "master_plan_path": { "type": "string" },
+        "signal_note": { "type": "string" }
+      }
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_path", "source_class"],
+      "properties": {
+        "asset_path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repo-relative path to canonical still (PuLID reference / model_sheet / Pearl Star Qwen-Image render). Cloud still-quota MUST NOT be spent on anchors."
+        },
+        "public_url": {
+          "type": "string",
+          "description": "Stable public URL or data URI for i2v first_frame / media[] (Lane 02 DOC-CONFIRMED)."
+        },
+        "source_class": {
+          "enum": ["pulid_reference", "model_sheet", "pearl_star_render", "approved_panel_crop"],
+          "description": "Existing identity machinery only — never DashScope still-quota."
+        },
+        "outfit_id": { "type": "string" },
+        "identity_version": { "type": "string" }
+      }
+    },
+    "capture_sets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/capture_set" }
+    },
+    "quota_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine_lane", "planned_seconds", "reserve_seconds"],
+      "properties": {
+        "engine_lane": {
+          "enum": ["dashscope_free_i2v", "dashscope_free_t2v", "dashscope_free_r2v", "pearl_star_vace", "pearl_star_wan"],
+          "description": "Pilot default dashscope_free_i2v; scale pearl_star_vace. r2v only when free seconds proven."
+        },
+        "planned_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Sum of capture_sets duration_s for this burn plan."
+        },
+        "reserve_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Retake reserve; pack default ≥10s for free-quota pilot."
+        },
+        "sunset_date": {
+          "type": "string",
+          "description": "ISO date; free-media exception hard stop 2026-10-18."
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "provenance_default": {
+      "enum": ["INTERIM", "REAL"],
+      "description": "Q-VBANK-03: DashScope-derived = INTERIM permanently; Apache Wan/VACE self-host = REAL-eligible after full gate chain (still stamped REAL only post-gates)."
+    },
+    "notes": { "type": "string" }
+  },
+  "definitions": {
+    "capture_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "clip_id",
+        "prompt",
+        "duration_s",
+        "engine",
+        "anchor_mode",
+        "demanded_pose_ids"
+      ],
+      "properties": {
+        "family": {
+          "enum": ["dialogue", "locomotion", "seated", "genre_pack"],
+          "description": "Action family. One short clip per family entry; curation selects smallest sufficient pose set."
+        },
+        "clip_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique within manifest; maps to A-namespace motion artifact id when registered."
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Comic-readable key-pose clip prompt: staged anticipation/impact/follow-through, locked camera, full body in frame, flat neutral high-contrast background, single character, no props unless demanded."
+        },
+        "duration_s": {
+          "type": "number",
+          "minimum": 2,
+          "maximum": 15,
+          "description": "Pilot recipe prefers 5s; i2v API allows 2–15 integer seconds."
+        },
+        "engine": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Model id, e.g. wan2.7-i2v or local VACE-1.3B workflow tag."
+        },
+        "anchor_mode": {
+          "enum": ["i2v", "r2v", "vace", "t2v"],
+          "description": "Pilot = i2v from same anchor; r2v deferred unless free seconds proven; vace = Pearl Star scale; t2v = smoke only."
+        },
+        "demanded_pose_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Only DEMANDED pose_ids drive clips and curation. §6.8 / continuity §8 cardinality applies: never keep all frames."
+        },
+        "a_namespace_id": {
+          "type": "string",
+          "pattern": "^A[0-9]$",
+          "description": "Optional reserved animation-namespace claim for the motion-source artifact (clip/contact sheet)."
+        },
+        "sampling_recipe": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "candidate_keyed_samples": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Lane 02: 8–12 keyed samples for 5s clip (not uniform stride)."
+            },
+            "bank_keep_target": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Lane 02: 4–6 banked cutouts after QA for 5s clip."
+            }
+          }
+        }
+      }
+    }
+  }
+}
