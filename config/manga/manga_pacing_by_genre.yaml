@@ -34,6 +34,23 @@ genre_pacing:
       - "Demon Slayer"
       - "Jujutsu Kaisen"
       - "My Hero Academia"
+    arc_cadence:
+      episodes_per_arc_range: [6, 60]
+      episodes_per_arc_median: 26
+      arc_pattern: escalating
+      season_unit: 9  # chapters per tankobon volume (Weekly Shonen Jump convention)
+      first_major_shift_by: 100
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Story Arcs — One Piece Wiki (onepiece.fandom.com/wiki/Story_Arcs, accessed 2026-07-24)"
+        - "Demon Slayer: All Manga Arcs in Order & Chapters — ComingSoon (comingsoon.net/guides/news/1786665, accessed 2026-07-24)"
+        - "Shibuya Incident Arc — Jujutsu Kaisen Wiki (jujutsu-kaisen.fandom.com/wiki/Shibuya_Incident_Arc, accessed 2026-07-24)"
+        - "Paranormal Liberation War Arc — My Hero Academia Wiki (myheroacademia.fandom.com/wiki/Paranormal_Liberation_War_Arc, accessed 2026-07-24)"
+      notes: >-
+        Arcs lengthen as the run matures (KnY 9->44, MHA ~10->54, OP <20 -> 100+); late-run
+        mega-arcs (Dressrosa 102, Wano ~148) are outliers beyond the planning range. Arc ends
+        align only partially with volume edges; saga ends align better. First 100 chapters ~5-8
+        arcs; first status-quo shift lands ch 66-101 (KnY 66, JJK 79, MHA 92-94, OP 100).
 
   romance:
     label: "Shojo romance"
