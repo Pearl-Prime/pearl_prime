@@ -1,11 +1,12 @@
 # Manga Arc Storyboard Contract
 
-Status: v1.0 SPECCED + CODE-WIRED (CI gate + proving-ground cell)  
+Status: v1.1 SPECCED + CODE-WIRED (CI gate + proving-ground cell + downstream consumption)  
 Owner: Pearl Research / Manga Story Governance  
-Created: 2026-07-20  
+Created: 2026-07-20 · Updated: 2026-07-24 (v1.1 — §Storyboard consumption)  
 Schema: `schemas/manga/arc_storyboard_plan.schema.json`  
 CI: `scripts/ci/check_manga_arc_storyboard.py`  
-Planner pack: `docs/agent_prompt_packs/manga_arc_storyboard_planner.md`
+Planner pack: `docs/agent_prompt_packs/manga_arc_storyboard_planner.md`  
+Consumers: `phoenix_v4/manga/chapter/visual_from_script.py`, `scripts/manga/run_chapter_visual.py`, `scripts/manga/assemble_from_bank.py`
 
 ## Purpose
 
@@ -118,6 +119,67 @@ craft + strategy banks
   → genre scene coverage
   → panel_prompts → V5 render → letter / PDF
 ```
+
+## Storyboard consumption (v1.1 — the plan is an INPUT, not paperwork)
+
+Before v1.1 nothing downstream consumed `arc_storyboard_plan.yaml` — it was
+planning-only. The board is now a first-class input to the visual path:
+
+```text
+arc_storyboard_plan ──┐
+                      ├─→ compile_panel_prompts_from_chapter_script(...,
+chapter_script ───────┘        arc_storyboard=...)   [visual_from_script.py]
+                                → panel_prompts.json  (storyboard_driven: true,
+                                  per-panel storyboard{} block, WARN divergence rows)
+arc_storyboard_plan.layer_picks
+                                → build_assembly_layer_hints(...)
+                                → assembly_layer_hints.json (manifest layers[] entries,
+                                  INTERIM placeholders + demand-gap rows)
+assembly manifest (storyboard / arc_storyboard_ref fields)
+                                → assemble_from_bank.py (hint ingestion: validated,
+                                  carried into gate report + provenance table;
+                                  composition grammar G1–G6 still gate assembly)
+```
+
+### Rules
+
+1. **Storyboard is the page/panel authority.** With
+   `--arc-storyboard` (CLI `scripts/manga/run_chapter_visual.py`) or
+   `arc_storyboard=` (library), the board's page map + panel order drive panel
+   count and ordering; per-panel `visual_proof` leads the positive prompt as
+   the scene beat, `story_move` / `information_delta` travel on the panel's
+   `storyboard{}` block. The chapter script still supplies dialogue
+   (`dialogue` or localized `dialogue_lines`).
+2. **Divergence rule (OPD-154: panel descriptions > writer notes).** When the
+   storyboard and script disagree on panel count for a page/beat, the
+   storyboard wins and a WARN row is emitted into
+   `storyboard_divergences[]` on the panel_prompts artifact
+   (`page_panel_count_mismatch`, `script_panel_not_in_storyboard`,
+   `storyboard_panel_missing_from_script`, `dialogue_disallowed_by_storyboard`).
+   Nothing is silently dropped — every resolution is a named row.
+3. **Layer picks → assembly hints.** Storyboard panels may carry
+   `layer_picks[]` (`{layer_class, asset, provenance?, bbox_pct?, ...}` — legal
+   via this schema's `additionalProperties`). `build_assembly_layer_hints`
+   turns them into assembly-manifest `layers[]` entries with **provenance
+   carried through** (a declared INTERIM is never upgraded to REAL). Picks
+   whose asset is missing or below the 50 KB byte floor become **flagged
+   INTERIM placeholder rows** plus demand-gap rows in the
+   `panels_with_gaps` format the bank demand rollup consumes.
+4. **Grammar stays gatekeeper.** A storyboard-planned manifest panel passes
+   through composition grammar G1–G6 unchanged in `assemble_from_bank.py`;
+   an illegal `crop_class × bg_class` combination FAILS assembly regardless
+   of what the board planned (regression-tested). The manifest `storyboard{}`
+   block (when present) must carry non-empty `story_move` + `visual_proof`
+   (hard rule 1 above) and is carried into `gate_report.json` +
+   `_provenance.json` for panel→plan traceability.
+5. **Script-only path unchanged.** With no storyboard passed, the legacy path
+   is byte-identical (regression-tested in
+   `tests/manga/test_storyboard_consumption.py`).
+
+Acceptance labeling for this wiring: CODE-WIRED with EXECUTED-REAL fixture
+runs (cognitive_clarity ja_JP ep_001 board + script). No GPU rendering is
+implied by this section; storyboard-driven prompts still claim at most
+`structurally_clear` / `authored_candidate`.
 
 ## Acceptance language
 
