@@ -1,0 +1,44 @@
+{
+  "artifact_type": "chapter_script_writer_handoff",
+  "schema_version": "1.0.0",
+  "series_id": "supernatural_craft_pass",
+  "chapter_id": "ch01",
+  "chapter_number": 1,
+  "genre_id": "supernatural_everyday",
+  "story_strategy_genre": "supernatural_everyday",
+  "relevance_genre": "supernatural_everyday",
+  "reader_market": "ja_JP",
+  "reader_audience": "gen_z",
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "scene": "A single teacup sits out of place on the floor of the empty room; a trace of cold air by the shelf.",
+          "narration": "The chair was set for a mother who left long ago. An unspoken grief clings to the wood.",
+          "characters": ["protagonist"]
+        },
+        {
+          "scene": "Mist gathers at the torii threshold; still water beyond.",
+          "dialogue": [{"speaker": "child-spirit", "text": "The box. Under the floor."}],
+          "characters": ["protagonist", "child-spirit"]
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "action": "The child-spirit fades at the shrine gate; a quiet farewell.",
+          "narration": "She watches them go and is left alone in the empty house.",
+          "characters": ["protagonist"]
+        },
+        {
+          "scene": "Aftermath. The room is quiet.",
+          "narration": "The residue settles in her chest; the cost of hearing what others cannot.",
+          "characters": ["protagonist"]
+        }
+      ]
+    }
+  ]
+}
