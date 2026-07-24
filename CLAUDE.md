@@ -17,6 +17,18 @@ operations agent.
 - `ANTHROPIC_API_KEY` / `CLAUDE_API_KEY` reads in repo code
 - OpenAI cloud, Google AI, DashScope cloud, Together, Replicate, Perplexity, Cohere, Mistral paid
 - Violations block PRs. Run `python3 scripts/ci/audit_llm_callers.py` before pushing.
+- **Scoped exception (2026-07-21, corrected 2026-07-22):** DashScope Qwen3.7
+  Max / Qwen-MT for the CJK translation-quality program — immediate driving
+  use case is Mainland zh-CN translation (Qwen3.7 Max as primary literary
+  translator), not zh-TW-only — ONLY through
+  `scripts/localization/translation_quality/candidates/dashscope_qwen_client.py`,
+  which calls DashScope via the existing OpenAI-compatible-mode endpoint in
+  `scripts/localization/llm_client.py`, not the native DashScope SDK (see
+  `config/governance/banned_llm_patterns.yaml` →
+  `openai_api_cloud.exempt_paths`, NOT `dashscope_paid_tier`), cost-capped,
+  calibration-set + explicitly high-risk content only,
+  `PHOENIX_TRANSLATION_ALLOW_CLOUD=1` required. No other DashScope call site
+  is exempt. See `docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/`.
 
 ## API Keys & Credentials — READ THIS FIRST
 
@@ -226,6 +238,17 @@ python3 scripts/ci/pr_governance_review.py
 ```
 
 If either blocks, do NOT merge. Ask the owner.
+
+`pre_merge_check.sh` also prints the PR's live per-check CI status (added
+2026-07-23 after the PR #191 incident: a session merged while reporting "all
+governance checks pass" when Core tests and Release gates hadn't even
+finished, and one check had already failed). It hard-blocks on any check
+still pending; it warns — without hard-blocking — on completed failures,
+since some workflows on this repo run chronically red for reasons unrelated
+to a given diff. **Never report "all checks pass" or "all governance checks
+pass."** Read the printed per-check status and name each one: which passed,
+which are pending, which are failing and why merging anyway is safe (e.g.
+"failing on main independent of this PR, tracked separately").
 
 ## Golden Branch Pattern
 

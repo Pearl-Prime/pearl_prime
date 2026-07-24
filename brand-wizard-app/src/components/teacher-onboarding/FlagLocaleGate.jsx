@@ -1,7 +1,7 @@
 /**
  * 14-flag locale gate for /teacher_onboarding.
- * Pattern mirrored from pearl_prime_entry.html LANES / selectLane — without
- * mutating that page or sharing its phoenix_lane localStorage key.
+ * Pattern mirrored from index.html (Pearl Prime entry) LANES / selectLane —
+ * without mutating that page or sharing its phoenix_lane localStorage key.
  */
 import { TEACHER_ONBOARDING_LOCALES, useTeacherOnboardingI18n } from "../../i18n-teacher-onboarding.jsx";
 

@@ -1,0 +1,444 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_003
+genre_id: sports_competition
+title: '静寂のフリースロー——第3話「忘れ物」'
+logline: Returning alone after hours under the excuse of forgotten shoes, Hayato
+  finds Kuroda already in the gym, and receives not a lecture but a single
+  wordless demonstration at the free-throw line.
+stakes_now: Hayato has only ever seen Kuroda as background texture, sweeping and
+  racking balls; after nearly quitting before ep_002's practice was even over, this
+  is the first time he is alone with the team's silent gatekeeper, with no
+  teammates around to absorb the awkwardness.
+stakes_end: Nothing is fixed and no lesson is spoken aloud. Hayato has watched one
+  deliberate bounce and one clean release, been given exactly two words by a man
+  who otherwise says nothing, and made one small private choice afterward, to
+  leave his shoes by the door instead of hiding them in a drawer.
+genre_cadence:
+- established_after_hours_office
+- unread_team_signal
+- forgotten_shoes_recall
+- decision_to_return
+- return_to_gym_transit
+- shoe_locker_left_open
+- unexpected_presence_discovered
+- threshold_hesitation
+- wordless_acknowledgment
+- minimal_verbal_exchange
+- lingering_observation
+- wordless_demonstration
+- held_stillness_and_release
+- quiet_registration
+- single_word_close
+- closing_object_shift
+page_turn_promises:
+- page_id: ep_003_p01
+  promise: Will Hayato make it in and out of the gym before anyone, especially
+    Kuroda, notices he came back at all?
+- page_id: ep_003_p02
+  promise: Now that he has been caught, what does the caretaker who never speaks
+    actually want from him?
+panels:
+- panel_id: ep003_001
+  page_id: ep_003_p01
+  story_function: established_after_hours_office
+  story_move: The episode opens on the sales-support floor well past normal hours,
+    establishing Hayato's workplace baseline (half-untucked shirt, alone at his
+    desk) before the gym is even mentioned.
+  visual_proof: Wide office shot, most fluorescents off, one desk lamp lit,
+    Hayato's tie loosened and shirt hem half out, laptop glow on his face.
+  information_delta: Reader confirms it is very late and Hayato is still at work,
+    alone.
+  beat_role: workday_baseline
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_002
+  page_id: ep_003_p01
+  story_function: unread_team_signal
+  story_move: A notification from the club's LINE group surfaces the team he has
+    not yet properly joined, with a direct question from Aya waiting unanswered.
+  visual_proof: Close on phone screen, group name Shinonome Basketball, Aya's
+    message visible, three unread badges.
+  information_delta: Reader learns Hayato has not replied to the team since
+    ep_002's disaster.
+  beat_role: notification_trigger
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_003
+  page_id: ep_003_p01
+  story_function: unread_team_signal
+  story_move: Hayato looks away from the message and closes the phone without
+    answering, an avoidance beat rather than a decision.
+  visual_proof: Tight on Hayato's face, eyes sliding off the screen, thumb pressing
+    the phone dark.
+  information_delta: Reader sees he is not ready to face the team, only the gym.
+  beat_role: avoidance_beat
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_004
+  page_id: ep_003_p01
+  story_function: forgotten_shoes_recall
+  story_move: The desk-drawer sneakers, his established just-in-case pair, are
+    shown beside the absence of the shoes he actually needs.
+  visual_proof: Close on an open desk drawer, one neatly placed old sneaker pair,
+    visibly not game shoes.
+  information_delta: Reader distinguishes the backup pair from the real practice
+    shoes, which are missing.
+  beat_role: object_absence
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_005
+  page_id: ep_003_p01
+  story_function: forgotten_shoes_recall
+  story_move: A brief, wordless visual fragment recalls the end of ep_002, shoes
+    abandoned mid-floor as Hayato fled the gym.
+  visual_proof: Fast inset panel, gym floor, a pair of shoes left crooked and
+    half-tied, no caption.
+  information_delta: Reader connects tonight's errand to the prior episode's exit
+    without narration explaining it.
+  beat_role: flashback_fragment
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_006
+  page_id: ep_003_p01
+  story_function: decision_to_return
+  story_move: Hayato commits to going back for the shoes tonight, banking on the
+    building being empty at this hour.
+  visual_proof: Hayato standing, bag over one shoulder, glancing at the dark
+    hallway beyond the office door.
+  information_delta: Reader learns the plan, quick and quiet, before anyone sees.
+  beat_role: resolve_to_return
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_007
+  page_id: ep_003_p01
+  story_function: return_to_gym_transit
+  story_move: A short transit beat through the empty building corridor establishes
+    solitude and the late hour with a concrete ambient detail.
+  visual_proof: Wide corridor shot, a vending machine humming under dim light,
+    no other person visible.
+  information_delta: Reader tracks the physical distance between office and gym
+    as pure solitude.
+  beat_role: transit_solitude
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_008
+  page_id: ep_003_p01
+  story_function: shoe_locker_left_open
+  story_move: Hayato reaches the club room and finds the shoe locker already
+    standing ajar, a small wrongness before he has touched anything.
+  visual_proof: Medium shot, club room doorway, a row of shoe lockers, one door
+    hanging open that should be shut.
+  information_delta: Reader registers the first sign that Hayato is not actually
+    alone in this after-hours building.
+  beat_role: anomaly_noticed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_009
+  page_id: ep_003_p01
+  story_function: shoe_locker_left_open
+  story_move: His shoes are exactly where he left them, but neatened, laces
+    straightened, not the sloppy pair he abandoned in ep_002.
+  visual_proof: Close on the shoes inside the locker, laces coiled and paired
+    heel to heel, clearly handled by someone else.
+  information_delta: Reader confirms someone touched and cared for the shoes
+    without being asked.
+  beat_role: anomaly_confirmed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_010
+  page_id: ep_003_p01
+  story_function: unexpected_presence_discovered
+  story_move: Light spills from under the gym door where Hayato expected total
+    darkness at this hour.
+  visual_proof: Wide corridor-to-gym-door shot, a thin bar of light under the
+    closed door.
+  information_delta: Reader learns the gym is occupied when it should not be.
+  beat_role: unexpected_light
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_011
+  page_id: ep_003_p01
+  story_function: unexpected_presence_discovered
+  story_move: Through the cracked door, Hayato sees Kuroda alone on the court,
+    methodically resetting the ball rack, his signature unhurried gesture.
+  visual_proof: Wide interior shot from the doorway, an older man's bent back and
+    economical hands realigning a full ball rack under half the house lights.
+  information_delta: Reader identifies Kuroda as the source of the light and the
+    only other person in the building.
+  beat_role: vessel_sighted
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_012
+  page_id: ep_003_p01
+  story_function: threshold_hesitation
+  story_move: Hayato freezes at the door, caught between backing out unseen and
+    stepping into a conversation he does not want.
+  visual_proof: Close on Hayato's hand on the door edge, weight still tilted
+    backward.
+  information_delta: Reader feels the private stakes of simply being noticed
+    here, before any words are exchanged.
+  beat_role: threshold_freeze
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_013
+  page_id: ep_003_p01
+  story_function: wordless_acknowledgment
+  story_move: Kuroda looks up without stopping the rack work, and answers the
+    locker mystery with a small jerk of his chin toward the club room, no words.
+  visual_proof: Medium two-shot, Kuroda's eyes flicking to Hayato for less than a
+    second, chin tilting toward the locker hallway.
+  information_delta: Reader learns wordlessly that Kuroda was the one who
+    straightened the shoes, closing panel 9's mystery without dialogue.
+  beat_role: silent_acknowledgment
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_014
+  page_id: ep_003_p02
+  story_function: minimal_verbal_exchange
+  story_move: Hayato fills the silence with an apology and a half-finished
+    explanation, the only person in the room doing any talking.
+  visual_proof: Medium shot, Hayato half-bowing near the doorway, bag still on
+    his shoulder.
+  information_delta: Reader hears Hayato's own voice carrying the entire verbal
+    weight of the scene, contrasted against Kuroda's economy.
+  beat_role: apology_offered
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_015
+  page_id: ep_003_p02
+  story_function: minimal_verbal_exchange
+  story_move: Kuroda does not answer, simply continues correcting the rack by
+    millimeters, refusing to fill the conversational gap Hayato left open.
+  visual_proof: Close on Kuroda's hands nudging a ball into exact alignment,
+    face unreadable.
+  information_delta: Reader confirms Kuroda's register, high restraint,
+    established rather than merely stated.
+  beat_role: silence_held
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_016
+  page_id: ep_003_p02
+  story_function: lingering_observation
+  story_move: Shoes retrieved, Hayato knows he should leave, but his feet do not
+    move toward the door.
+  visual_proof: Medium shot, Hayato standing just inside the gym with his shoes
+    under one arm, not walking out.
+  information_delta: Reader sees curiosity outweighing the urge to escape
+    unnoticed.
+  beat_role: lingering_pull
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_017
+  page_id: ep_003_p02
+  story_function: lingering_observation
+  story_move: Hayato actually watches Kuroda work for the first time, noticing
+    the total absence of wasted motion, a sharp contrast to his own chaos in
+    ep_002.
+  visual_proof: Wide shot, Kuroda's economical hands against a full rack of
+    aligned balls, Hayato small in the frame watching.
+  information_delta: Reader is given the visual contrast the episode's craft is
+    built on, before any technique is demonstrated.
+  beat_role: economy_observed
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_018
+  page_id: ep_003_p02
+  story_function: wordless_demonstration
+  story_move: Kuroda stops mid-task and lifts one ball off the rack, the first
+    sign that something beyond routine cleanup is about to happen.
+  visual_proof: Close on Kuroda's hand closing around a single basketball,
+    lifted free of the rack.
+  information_delta: Reader senses a shift in intention without any dialogue
+    announcing it.
+  beat_role: demonstration_begins
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_019
+  page_id: ep_003_p02
+  story_function: wordless_demonstration
+  story_move: Kuroda walks to the free-throw line favoring his right knee, the
+    old semi-pro injury made visible without any line of dialogue naming it.
+  visual_proof: Wide tracking shot, Kuroda's gait, a faint hitch on the right
+    leg, court markings under his feet.
+  information_delta: Reader receives the injury backstory as body language,
+    never as exposition.
+  beat_role: body_cost_visible
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_020
+  page_id: ep_003_p02
+  story_function: wordless_demonstration
+  story_move: Kuroda sets his stance at the line and takes one unhurried breath
+    before touching the ball to the floor.
+  visual_proof: Medium shot, Kuroda squared at the free-throw line, ball held
+    low, shoulders settling.
+  information_delta: Reader watches ritual preparation with no commentary, the
+    lesson entirely physical.
+  beat_role: breath_before_line
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_021
+  page_id: ep_003_p02
+  story_function: wordless_demonstration
+  story_move: The ball bounces exactly once, deliberate and unhurried, the
+    episode's whole thesis compressed into a single sound.
+  visual_proof: Extreme close on the ball meeting hardwood, a single clean
+    contact, no crowd, no second bounce.
+  information_delta: Reader receives the technique itself as the entire
+    argument, with zero explanatory dialogue attached.
+  beat_role: the_bounce
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_022
+  page_id: ep_003_p02
+  story_function: held_stillness_and_release
+  story_move: A held beat follows the bounce, the gym holding no sound but that
+    one contact, stretched long enough for the reader to feel it.
+  visual_proof: Wide silent shot, Kuroda motionless at the line, Hayato equally
+    still at the edge of frame.
+  information_delta: Reader is given the stillness itself as the carrier image,
+    matching the arc-wide strategy device in miniature.
+  beat_role: stillness_beat
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_023
+  page_id: ep_003_p02
+  story_function: held_stillness_and_release
+  story_move: Kuroda releases a clean, unhurried shot, form settled rather than
+    dramatic.
+  visual_proof: Follow-arc shot, ball leaving Kuroda's hands in a textbook
+    release, no exaggerated wind-up.
+  information_delta: Reader sees the payoff of the stillness as ordinary
+    competence, not spectacle.
+  beat_role: clean_form
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_024
+  page_id: ep_003_p02
+  story_function: held_stillness_and_release
+  story_move: The ball drops through, but Kuroda is already reaching for the
+    next ball on the rack, never having watched to see if it went in.
+  visual_proof: Wide shot, net still swaying, Kuroda's back already turned
+    toward the rack.
+  information_delta: Reader confirms the outcome is deliberately not the point,
+    reinforcing the arc's anti-scoreboard doctrine at episode scale.
+  beat_role: outcome_unwatched
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_025
+  page_id: ep_003_p02
+  story_function: quiet_registration
+  story_move: Hayato registers, purely visually, that Kuroda's eyes never left
+    the ball's seams during the entire sequence, not the rim, not the door, not
+    him.
+  visual_proof: Close on Hayato's face, a small private flicker of recognition,
+    no caption stating what it means.
+  information_delta: Reader is trusted to draw the connection themselves; no
+    narration interprets the demonstration.
+  beat_role: detail_registered
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_026
+  page_id: ep_003_p02
+  story_function: quiet_registration
+  story_move: Kuroda finishes returning the ball to the rack and does not turn
+    back around, the demonstration already closed without comment.
+  visual_proof: Wide shot, Kuroda's back to the room, rack now fully aligned.
+  information_delta: Reader sees the lesson has no aftermath speech attached to
+    it at all.
+  beat_role: rack_reset_close
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_027
+  page_id: ep_003_p02
+  story_function: single_word_close
+  story_move: As Hayato reaches the door, Kuroda speaks his only line of the
+    entire episode, two words, without turning around.
+  visual_proof: Medium shot, Kuroda's back to camera at the rack, Hayato paused
+    at the doorway looking back.
+  information_delta: Reader receives the episode's entire dialogue budget from
+    Kuroda in one short, unadorned line.
+  beat_role: single_word
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_028
+  page_id: ep_003_p02
+  story_function: single_word_close
+  story_move: Hayato answers with one quiet word of his own before finally
+    leaving.
+  visual_proof: Close on Hayato's face at the door, a small, uncertain nod.
+  information_delta: Reader sees Hayato accept the implied invitation without
+    either of them naming it as one.
+  beat_role: quiet_reply
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_029
+  page_id: ep_003_p02
+  story_function: closing_object_shift
+  story_move: On the train home, the last-train hour presses in, an ordinary
+    workplace-adjacent pressure layered back onto the private moment just left
+    behind.
+  visual_proof: Wide shot, Hayato on a near-empty train car, shoe bag held
+    differently than his usual work bag.
+  information_delta: Reader is returned to the market-native commuter texture
+    that frames Hayato's whole double life.
+  beat_role: transit_home
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_030
+  page_id: ep_003_p02
+  story_function: closing_object_shift
+  story_move: At his apartment entryway, Hayato does not put the practice shoes
+    away in the back of a closet; he leaves them by the door, ready.
+  visual_proof: Final wide shot, genkan entryway, practice shoes placed neatly
+    beside the front door instead of stored out of sight.
+  information_delta: Reader receives the episode's entire turn as one small,
+    concrete, externalized object choice, with no line of narration stating
+    what it means.
+  beat_role: object_left_by_door
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_003.yaml
+notes: Episode 3 of 12, arc 1's first Kuroda beat per ASSIGNMENT_MATRIX.tsv.
+  Authored from the bible's beat description and the story_architecture_handoff
+  catalyst (the_shoe_locker_left_open); ep_002 was not present on disk at
+  authoring time, so continuity assumes ep_002's beat description only (near-quit
+  after a botched first practice). Kuroda's spoken dialogue is capped at exactly
+  one line, two words, per the arc doctrine against the mentor explaining the
+  lesson aloud. scripts/ci/check_manga_arc_storyboard.py does not exist in this
+  checkout; this file is written to the required shape for continuity but was not
+  gated against that script.

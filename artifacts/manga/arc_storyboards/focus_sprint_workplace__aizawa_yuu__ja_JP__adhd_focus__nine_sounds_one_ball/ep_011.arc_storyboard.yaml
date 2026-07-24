@@ -1,0 +1,446 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_011
+genre_id: sports_competition
+title: "Nine Sounds, One Ball — Episode 11: The Thing Beneath the Sound (English gloss)"
+logline: In the loser's-bracket rematch against the exact team that ended their first
+  qualifier, Hayato is fouled with the score tied and seconds left — and finds, at the
+  line, not a way to silence the noise, but the one thing worth hearing inside it.
+stakes_now: Shinonome has been pushed to the loser's bracket by the team that beat them
+  once already; Hayato has never had to hold Kuroda's wordless technique under a crowd
+  this large, this loud, or this personally loaded, with the opposing captain needling
+  him about the exact play that ended his season before.
+stakes_end: The team survives by a single point, decided by a defensive stop that belongs
+  to Endou, not Hayato. The free throw that actually mattered was never about whether it
+  dropped — the stillness at the line landed before the shot and stays true regardless of
+  the final score, which proves nothing about whether Hayato is fixed.
+genre_cadence:
+- pre_trigger_scale
+- foul_call_trigger
+- crowd_noise_arrival
+- memory_light_flicker
+- rival_taunt_at_the_line
+- line_overload_scan
+- first_shot_count_lost
+- first_shot_forced_miss
+- team_reaction_practical_call
+- private_object_established
+- forcing_attempt_fails
+- noise_amplifies_under_force
+- private_object_recalled
+- narrowing_to_the_ball
+- one_deliberate_bounce
+- held_stillness_carrier
+- held_stillness_breath
+- clean_release_form
+- arc_of_the_shot
+- understated_result
+- flow_resumed_anchored
+- possession_transferred_to_team
+- teammate_physical_cost
+- decisive_stop
+- narrow_final_score
+- handshake_line
+- rival_quiet_witness
+- private_object_closing
+- honest_landing_image
+page_turn_promises:
+- page_id: ep_011_p01
+  promise: Can Hayato even hear his own routine underneath a crowd this size, in front
+    of the team that broke his season the first time?
+- page_id: ep_011_p02
+  promise: Does forcing the noise to stop work any better the second time, or does
+    something else have to give first?
+- page_id: ep_011_p03
+  promise: Does the stillness at the line actually survive contact with the shot — and
+    does the game's outcome even wait for the answer?
+- page_id: ep_011_p04
+  promise: What does Hayato do with a win that no one is asking him to prove anything with?
+panels:
+- panel_id: ep011_001
+  page_id: ep_011_p01
+  story_function: pre_trigger_scale
+  story_move: Establishes the tied score, the clock, and the largest, most public crowd
+    of the tournament before any character acts.
+  visual_proof: Wide gymnasium shot — scoreboard tied 58-58, clock at 0:47, stands packed
+    beyond capacity, a hand-lettered Shinonome coworkers' banner visible in the crowd.
+  information_delta: Reader confirms this is the biggest, most exposed stage the series
+    has staged a game on so far.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_002
+  page_id: ep_011_p01
+  story_function: foul_call_trigger
+  story_move: Hayato is fouled driving to the basket; the whistle stops the clock and
+    the ball rolls to a stop at his feet, the one static object in a suddenly frozen
+    gym.
+  visual_proof: Contact on the drive, whistle, referee's shooting-foul signal, the
+    basketball settling alone on the hardwood.
+  information_delta: Reader learns the exact mechanic that sends Hayato to the line —
+    a shooting foul, not a set play.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_003
+  page_id: ep_011_p01
+  story_function: crowd_noise_arrival
+  story_move: The crowd's reaction arrives as a wall of sound the instant the whistle
+    lands, establishing the noise the free throw will have to be attempted inside.
+  visual_proof: Crowd surge from both fanbases, protest and relief overlapping, no
+    single voice distinguishable.
+  information_delta: Reader feels the scale of noise Hayato is about to walk into
+    before he takes a single step toward the line.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_004
+  page_id: ep_011_p01
+  story_function: memory_light_flicker
+  story_move: An unnarrated, purely visual flicker of the high-school turnover intrudes
+    for a single beat — same angle of gym light, no caption, no explanation — then is
+    gone.
+  visual_proof: A half-panel bleed of remembered gym light at the same angle as the
+    present gym, gone the instant it appears.
+  information_delta: Reader connects this line to the series' founding wound without
+    a single word of narration doing it for them.
+  beat_role: memory_intrusion
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_005
+  page_id: ep_011_p01
+  story_function: rival_taunt_at_the_line
+  story_move: Daiei Bussan's captain, Miura, needles Hayato quietly at the lane line,
+    naming the exact failure everyone in the building already knows about.
+  visual_proof: Miura close beside the lane, low voice, eyes forward — a rival's
+    pressure applied without raising his voice.
+  information_delta: Reader learns the opposing team knows Hayato's history and is
+    using it on purpose.
+  beat_role: rival_pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_006
+  page_id: ep_011_p01
+  story_function: line_overload_scan
+  story_move: At the line, Hayato's eyes dart across every competing input at once —
+    scoreboard, banner, ball, crowd — while his interior voice names the overload
+    honestly.
+  visual_proof: Tight face shot, eyes cutting between scoreboard, crowd sign, and the
+    ball held out by the referee.
+  information_delta: Reader gets the episode's clearest statement of the flaw in
+    Hayato's own words, before any attempt to fix it.
+  beat_role: interior_focus
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_007
+  page_id: ep_011_p01
+  story_function: first_shot_count_lost
+  story_move: The bounce routine that should be automatic goes slippery under
+    pressure — Hayato loses count mid-dribble.
+  visual_proof: Close on the dribble, uncertain rhythm, two bounces bleeding toward a
+    third that may or may not belong.
+  information_delta: Reader sees the trained routine itself destabilize, not just
+    Hayato's mood.
+  beat_role: interior_focus
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_008
+  page_id: ep_011_p02
+  story_function: first_shot_forced_miss
+  story_move: The rushed shot clangs off the front iron — a real, earned miss, not a
+    near thing.
+  visual_proof: Ball striking the front rim hard, bouncing away, no ambiguity about
+    whether it was close.
+  information_delta: Reader confirms the practice fails honestly under public pressure,
+    consistent with the series' no-cure stance.
+  beat_role: forced_miss
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_009
+  page_id: ep_011_p02
+  story_function: team_reaction_practical_call
+  story_move: Endou's face tightens; Aya calls out a short, practical line from the
+    bench rather than a locker-room speech.
+  visual_proof: Endou's reaction, Aya leaning forward at the sideline, voice pitched to
+    carry over the crowd.
+  information_delta: Reader sees the team respond with tactical shorthand, not
+    moralizing — captain register per the genre's dialogue rules.
+  beat_role: team_response
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_010
+  page_id: ep_011_p02
+  story_function: private_object_established
+  story_move: Hayato's fingers find the folded conbini receipt tucked inside his
+    wristband — the private object carried since ep_010, unseen by anyone in the
+    building.
+  visual_proof: Close on fingers at the wristband, a small folded paper edge just
+    visible, nothing else in frame acknowledging it.
+  information_delta: Reader learns the ep_010 lesson has become a private, physical
+    habit rather than a stated belief.
+  beat_role: anchor_established
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_011
+  page_id: ep_011_p02
+  story_function: forcing_attempt_fails
+  story_move: On the second shot, Hayato tries to will the crowd silent by sheer
+    tension — and it does not work.
+  visual_proof: Jaw clenched, shoulders locked, a body straining against noise instead
+    of releasing.
+  information_delta: Reader sees the failed strategy (force) before the real one
+    (choice) — required beat per the strategy bank's non-carrier step.
+  beat_role: forcing_fails
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_012
+  page_id: ep_011_p02
+  story_function: noise_amplifies_under_force
+  story_move: The harder Hayato fights the noise, the more crowded and chaotic it
+    reads on the page.
+  visual_proof: Crowd/signage/phone-flash chaos intensifying around a static figure at
+    the line.
+  information_delta: Reader feels the trap of the forcing strategy — fighting the roar
+    is one more task layered onto an already full attention.
+  beat_role: noise_escalation
+  action_intensity: 3
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_013
+  page_id: ep_011_p02
+  story_function: private_object_recalled
+  story_move: His fingers find the receipt's fold again, this time on purpose. The jaw
+    unclenches.
+  visual_proof: Close on fingers deliberately returning to the wristband; shoulders
+    dropping a fraction.
+  information_delta: Reader sees the private object used consciously as an anchor,
+    not a nervous tic.
+  beat_role: anchor_recalled
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_014
+  page_id: ep_011_p02
+  story_function: narrowing_to_the_ball
+  story_move: Hayato lowers his eyes from the rim and the crowd to the one object left
+    in his hands, naming the choice in three words.
+  visual_proof: Extreme close on the ball's leather seams and his own fingers, rim and
+    crowd excluded from frame.
+  information_delta: Reader watches the field of attention narrow to a single object
+    in real time.
+  beat_role: narrowing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_015
+  page_id: ep_011_p02
+  story_function: one_deliberate_bounce
+  story_move: One clean, deliberate bounce — the device Kuroda taught wordlessly back
+    in ep_003, now self-administered.
+  visual_proof: Isolated close on ball-to-floor contact, sound rendered alone on the
+    page.
+  information_delta: Reader connects this bounce directly to the ep_003 wordless
+    lesson without any caption doing the connecting for them.
+  beat_role: one_bounce
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_016
+  page_id: ep_011_p03
+  story_function: held_stillness_carrier
+  story_move: THE CARRIER BEAT. A silent, extreme-close panel on both hands and the
+    ball only — clock, crowd, and scoreboard are excluded from the frame entirely.
+  visual_proof: Macro close on hands and ball, empty of all other visual information.
+  information_delta: Reader receives the episode's actual psychological turn here —
+    before the shot, independent of its outcome.
+  beat_role: carrier_stillness
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_017
+  page_id: ep_011_p03
+  story_function: held_stillness_breath
+  story_move: The held beat extends one panel further — a single slow exhale, the
+    crowd noise present but distant rather than gone.
+  visual_proof: Same macro framing, a breath visibly leaving him, no other change.
+  information_delta: Reader confirms the noise was never silenced, only relocated
+    further from the center of his attention.
+  beat_role: carrier_stillness
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_018
+  page_id: ep_011_p03
+  story_function: clean_release_form
+  story_move: The shooting form itself — wrist and follow-through only, no anticipation
+    of outcome rendered.
+  visual_proof: Close on the wrist snap and follow-through, tension absent from the
+    line of the arm.
+  information_delta: Reader sees the physical proof of the stillness beat in the
+    body's mechanics, not in narration.
+  beat_role: release_form
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_019
+  page_id: ep_011_p03
+  story_function: arc_of_the_shot
+  story_move: A brief, undramatized panel of the ball's arc — deliberately small, not
+    lingered on.
+  visual_proof: Small inset panel, ball mid-flight, minimal SFX.
+  information_delta: Reader is denied a lingering triumphant arc shot on purpose — the
+    outcome is not where the weight of the page goes.
+  beat_role: shot_arc
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_020
+  page_id: ep_011_p03
+  story_function: understated_result
+  story_move: The shot drops; Hayato is already turning toward defense before it
+    finishes falling — the make is real but deliberately not celebrated.
+  visual_proof: Net motion, Hayato's body already rotating away from the basket.
+  information_delta: Reader sees that his own attention has already moved on from the
+    result — proof the turn was never about the score.
+  beat_role: result_understated
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_021
+  page_id: ep_011_p03
+  story_function: flow_resumed_anchored
+  story_move: Play resumes at full crowd volume; Hayato moves through pass, slide, and
+    screen one action at a time instead of tracking all of it at once.
+  visual_proof: Compressed in-motion sequence — pass, defensive slide, screen — inside
+    one panel, full-volume crowd behind it.
+  information_delta: Reader sees the technique generalize into live play, not just
+    hold for one static shot.
+  beat_role: flow_anchored
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_022
+  page_id: ep_011_p03
+  story_function: possession_transferred_to_team
+  story_move: With twelve seconds left, the ball is deliberately not in Hayato's
+    hands — the deciding possession belongs to the team, not to him.
+  visual_proof: Daiei Bussan working the ball to Miura; Shinonome's zone set, Hayato
+    positioned off the ball.
+  information_delta: Reader registers that the game's outcome is structurally
+    separated from Hayato's own stillness beat.
+  beat_role: possession_transfer
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_023
+  page_id: ep_011_p03
+  story_function: teammate_physical_cost
+  story_move: Endou, legs nearly spent after a full fourth quarter, plants his body in
+    front of the shot anyway.
+  visual_proof: Endou's strained stance, sweat, a short gruff call for the ball.
+  information_delta: Reader sees visible physical cost on a teammate, keeping the
+    climax a team-sport event rather than a solo one.
+  beat_role: physical_cost
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep011_024
+  page_id: ep_011_p04
+  story_function: decisive_stop
+  story_move: Miura's shot deflects off Endou's contest into a loose ball; Endou dives
+    and secures it as the horn sounds. The game is decided by a stop, not a basket.
+  visual_proof: Contested shot, deflection, floor scramble, horn sounding over the
+    scrum.
+  information_delta: Reader sees the actual game-deciding action credited to a
+    teammate's defense, not to any shot at all.
+  beat_role: decisive_stop
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_025
+  page_id: ep_011_p04
+  story_function: narrow_final_score
+  story_move: Final score 59-58. No one has the breath left to celebrate; the margin
+    is as narrow as the game allows.
+  visual_proof: Scoreboard held on 59-58; players bent over, hands on knees, one
+    sitting on the floor.
+  information_delta: Reader confirms the win is narrow and physically costly, not a
+    clean or triumphant sweep.
+  beat_role: narrow_score
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_026
+  page_id: ep_011_p04
+  story_function: handshake_line
+  story_move: A near-wordless handshake line between both exhausted teams.
+  visual_proof: Handshake line, minimal eye contact exchanged, both benches visibly
+    spent.
+  information_delta: Reader gets the genre's post-game silence beat before any
+    dialogue resumes.
+  beat_role: aftermath_wordless
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_027
+  page_id: ep_011_p04
+  story_function: rival_quiet_witness
+  story_move: In the thinning stands, Kiryuu Ren stands alone, arms crossed, watching.
+    Only Hayato notices him for a single beat.
+  visual_proof: Kiryuu isolated in a background row of the emptying gym, unaddressed by
+    anyone.
+  information_delta: Reader receives a seed for ep_012's next-opponent reveal without
+    the episode naming or resolving it.
+  beat_role: rival_seed
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep011_028
+  page_id: ep_011_p04
+  story_function: private_object_closing
+  story_move: Alone at the bench, Hayato checks the receipt once, confirms it, and
+    tucks it back — a private, repeated gesture, not a triumphant one.
+  visual_proof: Close on the receipt drawn briefly from the wristband and returned,
+    no one else in frame.
+  information_delta: Reader sees the private object closed out as habit, not as a
+    trophy or a lesson stated aloud.
+  beat_role: anchor_closing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep011_029
+  page_id: ep_011_p04
+  story_function: honest_landing_image
+  story_move: Closing wide on the emptying gym — a single ball left near the bench,
+    the scoreboard still lit on the narrow final score.
+  visual_proof: Wide shot, emptying stands, one basketball on the floor, scoreboard
+    still reading 59-58.
+  information_delta: Reader receives the episode's closing image — the score changed,
+    the object in his hands did not — without a stated moral.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_011.yaml
+notes: Freshly authored as arc 1's live-game carrier-beat episode for strategy_01 ("The
+  One Ball at the Line"). The carrier beat (panels 016-017) is deliberately isolated
+  from the shot's outcome (018-020) and further isolated from the game's actual result,
+  which is handed to Endou's defensive stop (022-024), not to any basket of Hayato's —
+  per the strategy bank's anti_pattern_rules, the psychological turn must land before
+  and independent of the scoreboard. scripts/ci/check_manga_arc_storyboard.py does not
+  exist in this checkout (known gap per bible); this file is authored to the
+  stillness_press ep_011 template shape for continuity regardless.

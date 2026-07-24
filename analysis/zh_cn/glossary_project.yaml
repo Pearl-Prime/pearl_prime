@@ -1,0 +1,129 @@
+# glossary_project.yaml — zh-CN (Mainland Simplified Chinese)
+#
+# Phoenix Omega project-specific coined concepts, motif phrases, and
+# persona-pool-specific vocabulary. Context-sensitive term rules use the
+# source / preferred_by_context / avoid shape (NOT a flat dictionary) per
+# the program instructions — mirrors the zh-TW program's shape, reversed
+# for Mainland preferences.
+#
+# These are the critical_recurring items from risk_map.jsonl: once locked
+# here, every recurrence of the term across the corpus must use the exact
+# same zh-CN rendering. See concept_map.json for the full motif inventory
+# and duplicate_clusters.json for where these motifs cluster.
+
+schema_version: 1
+locale: zh-CN
+
+terms:
+  - source: "compassion fatigue"
+    preferred_by_context:
+      title_or_header: 共情耗竭       # topic-name / header role (locked)
+      narrative_body: 共情耗竭         # keep identical in narrative prose too — this is the named condition the whole atom family is built around
+    avoid: ["同情心疲勞", "慈悲疲勞"]   # Traditional-leaning / overly literal renderings
+    notes: >
+      Appears as the named condition across corporate_managers/
+      compassion_fatigue/{HOOK,STORY,REFLECTION,TAKEAWAY}. Sampled real
+      STORY v01-v20 (2026-07-22) confirms it is always the diagnostic label
+      the character is moving toward recognizing — must not drift to a
+      softer paraphrase in some files and the clinical term in others.
+
+  - source: "empathy tank empty"
+    aka: "motif phrase, tank-as-container-for-empathy"
+    preferred_by_context:
+      metaphor_body: 共情耗尽
+      compressed_takeaway: 共情耗尽
+    avoid: ["同理心油箱空了（過度直譯，讀起來機械）"]
+    notes: >
+      English source uses this as a recurring noun-phrase stand-in for the
+      exhaustion state itself (e.g. "the empathy tank empty loaded the next
+      scenario"). Do not translate literally as "tank/gas" imagery — render
+      as the state (耗尽) to match natural Mainland register; over-literal
+      tank imagery reads as mistranslation to a native reader.
+
+  - source: "caring past capacity"
+    aka: "motif phrase"
+    preferred_by_context:
+      metaphor_body: 关心超出了承受范围
+      compressed_form: 超负荷的关心
+    notes: Pairs with 共情耗竭/共情耗尽 — keep distinct from them (this
+      phrase names the overextension mechanism, not the end-state).
+
+  - source: "giving without refill"
+    aka: "motif phrase"
+    preferred_by_context:
+      metaphor_body: 只出不进的付出
+      compressed_form: 付出没有回补
+    notes: Recurs as the resource-depletion motif across STORY variants;
+      keep the give/replenish asymmetry explicit, do not flatten to a
+      generic "过度付出."
+
+  - source: "people-pleasing"
+    preferred_by_context:
+      title_or_header: 讨好型行为
+      narrative_body: 讨好
+      exercise_instruction: 讨好式选择   # e.g. "This is a people-pleasing choice."
+    avoid: ["取悅（帶有台灣語感的用法）"]
+    notes: >
+      Sampled corporate_managers/people_pleasing/EXERCISE v01-v06
+      (2026-07-22): the English source uses "people-pleasing" both as a
+      noun-phrase label ("This is a people-pleasing choice") and as a
+      general behavior descriptor — 讨好型/讨好式 for the labeling role,
+      讨好 alone in flowing description.
+
+  - source: "money watcher"
+    aka: 'financial-anxiety "watcher" role'
+    preferred_by_context:
+      title_or_header: 财务监视者
+      narrative_body: 时刻盯着账户的状态
+    notes: >
+      first_responders/financial_anxiety/watcher sample: "Marcus watches
+      his bank account. Always monitoring. Never relaxing." — render the
+      hypervigilance, not a literal "watcher" noun, in narrative body;
+      reserve 财务监视者 for header/label contexts only.
+
+  - source: "the loop"
+    aka: "rumination-as-mechanical-process motif, tech_finance_burnout/overthinking"
+    preferred_by_context:
+      metaphor_body: 思维循环
+      compressed_form: 循环
+    avoid: ["迴路（電子工程感過強）"]
+    notes: >
+      Sampled overthinking/SCENE v01-v30 (2026-07-22): the English source
+      runs a sustained computing metaphor ("CPU", "threads", "background
+      process", "the loop"). Render 循环/思维循环 for "the loop" itself;
+      it is acceptable (and often necessary for naturalness) to soften the
+      surrounding CPU/thread jargon rather than translate every computing
+      term literally — see style_guide_zh_cn.yaml §Metaphor handling.
+
+  - source: "quarterly review / stakeholders / direct reports / KPI / the deliverable"
+    aka: "workplace-noun scene furniture"
+    preferred_by_context:
+      narrative_body: 季度评估 / 相关方 / 直属下属 / 关键绩效指标（KPI，保留英文缩写） / 交付物
+    notes: >
+      These recur as concrete workplace nouns inside corporate_managers
+      STORY prose (not as {placeholder} tokens — they are literal words in
+      the English source). Use standard Mainland corporate register; KPI
+      itself is commonly left as the English acronym even in Mainland
+      business writing — keep it, do not force a full Chinese expansion
+      every time.
+
+  - source: 'PIVOT opener "Notice..." / "Try..."'
+    aka: "imperative reframe convention"
+    preferred_by_context:
+      instruction_opener: "注意到… / 试着…"
+    notes: >
+      Keep the second-person imperative economy of the English source
+      — do not pad into a softer suggestion form ("你可以尝试…") which
+      dilutes the atom's compressed instructional register.
+
+  - source: "EXERCISE spoken-line convention"
+    aka: "quoted self-statement to say aloud"
+    preferred_by_context:
+      quoted_self_statement: >-
+        render as a natural, sayable Mainland Mandarin sentence in quotes
+        — e.g. "I agreed because I feared the cost." → "我同意是因为我害怕付出代价。"
+    notes: >
+      These quoted lines are meant to be spoken aloud by the reader — test
+      every rendering by reading it out loud; reject anything that sounds
+      like a translated sentence rather than something a person would
+      actually say.

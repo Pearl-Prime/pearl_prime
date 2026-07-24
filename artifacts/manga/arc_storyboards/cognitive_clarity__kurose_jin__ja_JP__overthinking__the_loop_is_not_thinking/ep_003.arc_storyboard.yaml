@@ -1,0 +1,267 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_003
+genre_id: psychological_thriller
+title: The Search Before Clock-In — Episode 3 (English gloss)
+logline: Ren arrives before his team to keep digging through company records for the name that echoes
+  his sister's, unaware his own badge log is quietly building a pattern that will one day be read back
+  to him.
+stakes_now: Ren's professional reputation has been spotless until today — no late report, no missed
+  meal, no visible crack — and this episode is the first time the compulsion costs him something a
+  coworker can see and name out loud.
+stakes_end: The search is not resolved and Ren has not stopped — Saeki's hand on his desk eased his
+  shoulders for a moment, but his fingers returned to the keyboard, and the report stays late.
+genre_cadence:
+- office_habit_carried_in
+- badge_log_pattern_unflagged
+- database_search_beyond_scope
+- vessel_in_person_witness
+- vessel_plain_practical_question
+- cover_story_told_fluently
+- somatic_cost_foreshadowed
+- clock_motif_pressure
+- calendar_reminder_overridden
+- meal_skipped_cost_lands
+- reputation_cost_spoken_aloud
+- focus_unbroken_by_name
+- vessel_wordless_gesture
+- awareness_without_stopping
+- vessel_direct_short_warning
+- body_eases_hands_continue
+- episode_card
+page_turn_promises:
+- page_id: ep_003_p01
+  promise: Will Ren close the database search before the office fills up, or does the calendar reminder
+    get overridden the same way the mirror motif was ignored last night?
+- page_id: ep_003_p02
+  promise: Will Saeki's direct warning actually reach him this time, or does the body's brief ease
+    happen without the hands ever stopping?
+panels:
+- panel_id: ep003_001
+  page_id: ep_003_p01
+  story_function: office_habit_carried_in
+  story_move: Ren arrives before anyone else, carrying the previous night's reading habit directly into
+    the workplace instead of leaving it at home.
+  visual_proof: Wide shot of the empty pre-shift office with Ren alone at his terminal, a small badge
+    login readout visible in the corner of his screen.
+  information_delta: Reader learns the habit did not stay contained overnight — it has followed him to
+    work before the workday even begins.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_002
+  page_id: ep_003_p01
+  story_function: badge_log_pattern_unflagged
+  story_move: The badge access log reveals a pattern of late-night entries that no one has flagged to
+    Ren yet, planting the seed for the arc's later reversal.
+  visual_proof: Macro insert on the badge log readout showing repeated late entries across several
+    nights.
+  information_delta: Reader learns Ren is already generating a data trail about himself, unnoticed,
+    ahead of him.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_003
+  page_id: ep_003_p01
+  story_function: database_search_beyond_scope
+  story_move: Ren deliberately searches internal personnel and client records for a string resembling
+    his sister's name, escalating the boundary violation from a personal laptop to company systems.
+  visual_proof: Close insert on the internal database search bar with a query clearly outside Ren's
+    assigned task scope.
+  information_delta: Reader sees the compulsion has moved from private reading to an active, riskier
+    professional overreach.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_004
+  page_id: ep_003_p01
+  story_function: vessel_in_person_witness
+  story_move: The vessel Saeki arrives and physically witnesses the search screen for the first time in
+    person, re-entering the story as a direct observer rather than a remote contact.
+  visual_proof: Medium shot of Saeki entering the office, her step visibly pausing as her eyes catch
+    Ren's screen.
+  information_delta: Reader learns Saeki now has direct, undeniable knowledge of what Ren is doing, not
+    secondhand.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_005
+  page_id: ep_003_p01
+  story_function: vessel_plain_practical_question
+  story_move: Saeki asks a plain, practical question rather than confronting him directly, staying true
+    to the vessel's non-lecturing method while still registering as a witness.
+  visual_proof: Medium two-shot of Saeki speaking to Ren at his desk, her posture level and unalarmed.
+  information_delta: Reader hears the vessel's first in-person check on Ren since episode one, calibrated
+    to workplace register.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_006
+  page_id: ep_003_p01
+  story_function: cover_story_told_fluently
+  story_move: Ren deflects with a fluent, plausible cover story instead of answering honestly, showing
+    the justification skill from the craft bible's failure-mode warning in action.
+  visual_proof: Close on Ren half-closing his screen while answering, body language slightly too smooth.
+  information_delta: Reader learns Ren can lie about this convincingly, which makes the compulsion
+    harder for anyone to catch early.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_007
+  page_id: ep_003_p01
+  story_function: somatic_cost_foreshadowed
+  story_move: A cold, untouched coffee cup silently foreshadows the meal-skipping cost that lands later
+    in the episode.
+  visual_proof: Insert on a coffee cup with no steam rising, undisturbed beside Ren's keyboard.
+  information_delta: Reader is primed for the coming somatic cost before it is stated outright.
+  beat_role: somatic_onset
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_008
+  page_id: ep_003_p01
+  story_function: clock_motif_pressure
+  story_move: The office fills with arriving coworkers under the large wall clock, establishing the
+    episode's recurring deadline-pressure motif.
+  visual_proof: Wide shot of the office wall clock at start-of-shift, coworkers filing into their seats
+    around Ren.
+  information_delta: Reader gets the ordinary workday's baseline pressure, against which Ren's focus
+    will be measured as abnormal.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_009
+  page_id: ep_003_p01
+  story_function: calendar_reminder_overridden
+  story_move: Ren dismisses a calendar app reminder for a lunch meeting without finishing reading it,
+    the first ordinary obligation the habit visibly overrides.
+  visual_proof: Close insert on a calendar app notification being swiped away mid-load as Ren's eyes
+    return to the search bar.
+  information_delta: Reader learns the compulsion now has enough power to override a concrete scheduled
+    obligation, not just internal thoughts.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_010
+  page_id: ep_003_p02
+  story_function: meal_skipped_cost_lands
+  story_move: The overridden calendar reminder pays off as a concrete cost — lunch hour passes with an
+    untouched meal at Ren's desk.
+  visual_proof: Wide shot of the empty midday office, Ren still at his desk, an unopened bento visibly
+    untouched beside him.
+  information_delta: Reader receives the episode's first hard professional-adjacent cost, following
+    through on the earlier calendar override.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_011
+  page_id: ep_003_p02
+  story_function: reputation_cost_spoken_aloud
+  story_move: A coworker names the reputation cost directly and publicly for the first time, breaking
+    Ren's previously spotless professional record.
+  visual_proof: Medium shot of a coworker pausing at Ren's desk to remark on his uncharacteristically
+    late weekly report.
+  information_delta: Reader hears, in another character's own words, that Ren's behavior has become
+    visibly abnormal to the office at large.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_012
+  page_id: ep_003_p02
+  story_function: focus_unbroken_by_name
+  story_move: Ren responds curtly without looking up, showing the reputation cost registered but did
+    not change his behavior.
+  visual_proof: Close on Ren's face, eyes still locked on the search bar as he answers the coworker.
+  information_delta: Reader confirms social cost alone is not enough to break the loop at this stage of
+    the arc.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_013
+  page_id: ep_003_p02
+  story_function: vessel_wordless_gesture
+  story_move: Saeki returns and performs a small wordless gesture — resting a hand on the edge of his
+    desk — modeling regulation exactly as episode one's vessel grammar established, without any lecture.
+  visual_proof: Close on Saeki's hand resting flat on the edge of Ren's desk, no dialogue, her posture
+    settled.
+  information_delta: Reader sees the vessel's method recur unchanged, deepening the pattern established
+    in episode one.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_014
+  page_id: ep_003_p02
+  story_function: awareness_without_stopping
+  story_move: Ren registers the gesture consciously but does not stop working, showing awareness and
+    continuation coexisting for the first time in the arc.
+  visual_proof: Insert on Ren's eyes flicking briefly to Saeki's hand while his own fingers stay on the
+    keyboard.
+  information_delta: Reader learns noticing alone is no longer sufficient to interrupt the loop at this
+    stage.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_015
+  page_id: ep_003_p02
+  story_function: vessel_direct_short_warning
+  story_move: Saeki speaks a shorter, more direct line than her earlier questions, a genuine escalation
+    of her own concern without becoming a lecture.
+  visual_proof: Medium shot of Saeki speaking plainly and briefly, her tone noticeably more direct than
+    panel five.
+  information_delta: Reader hears the vessel's concern sharpen in direct proportion to Ren's escalating
+    behavior.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_016
+  page_id: ep_003_p02
+  story_function: body_eases_hands_continue
+  story_move: Ren's shoulders ease for a moment before his mind agrees, echoing episode one's thesis,
+    but this time the hands do not follow the body back to the keyboard's rest — they return to the
+    search instead, an honest reversal of episode one's small victory.
+  visual_proof: Close on Ren's shoulders visibly loosening for a beat, immediately followed by his
+    fingers resuming the keyboard.
+  information_delta: Reader sees the arc's thesis repeated and honestly failed this time — noticing did
+    not lead to updating tonight.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_017
+  page_id: ep_003_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_003.yaml
+notes: 'Episode 3 of 12 in arc 1 (''obsession seed''). Extends strategy_01 beats 4-5 (the accelerating
+  spiral of corrections, and the vessel''s direct-but-short cost line) as the office day following
+  episode 2''s home escalation. Deliberately does NOT grant Ren an update this episode — his body eases
+  but his hands do not stop, an honest craft-bible-compliant reversal of episode one''s small victory,
+  matching failure-mode warning 7 (a correct read/update must not become power-fantasy repetition).
+  Setting: the glass-walled analytics office from the strategy bank''s setting_pool, reused from ep_001
+  at a later, higher-stakes hour.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'
